@@ -12,6 +12,8 @@
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Dependencies -->
+        <logback.version>1.2.7</logback.version>
         <!-- Dependencies for Tests -->
         <assertJ.version>3.21.0</assertJ.version>
         <mockito.version>4.1.0</mockito.version>
@@ -21,6 +23,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
         <!-- Dependencies for Tests -->
         <dependency>
             <groupId>org.assertj</groupId>
