@@ -13,4 +13,15 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <url>https://github.com/mwttg/tiles-operator</url>
+    <organization>
+        <name>private</name>
+        <url>https://github.com/mwttg</url>
+    </organization>
+    <developers>
+        <developer>
+            <id>mwttg</id>
+            <email>Marco-Wittig@gmx.de</email>
+        </developer>
+    </developers>
 </project>
