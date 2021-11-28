@@ -115,6 +115,28 @@
 
     <build>
         <plugins>
+            <!--- Plant UML Image generator plugin -->
+            <plugin>
+                <groupId>com.github.jeluard</groupId>
+                <artifactId>plantuml-maven-plugin</artifactId>
+                <version>1.2</version>
+                <configuration>
+                    <sourceFiles>
+                        <directory>${basedir}/documentation</directory>
+                        <includes>/**/*.puml</includes>
+                    </sourceFiles>
+                    <outputInSourceDirectory>true</outputInSourceDirectory>
+                    <format>svg</format>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sourceforge.plantuml</groupId>
+                        <artifactId>plantuml</artifactId>
+                        <version>8059</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!-- code formatter checkstyle plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
