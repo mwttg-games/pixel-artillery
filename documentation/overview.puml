@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/object-diagram
+allow_mixing
+
+object "TextureAtlas (.png)" as TextureAtlas {
+}
+
+object "Level as Color Blocks (.png)" as Level {
+}
+
+object "BlockColor2TextureAtlasIndex (.json)" as Block2Texture {
+  0011ff => 0
+  44dd11 => 1
+  ...
+}
+
+object Input {
+  Texture Size (e.g. 16x16)
+}
+
+object "LevelGenerator" as LevelGenerator #aliceblue {
+  own small App
+}
+
+object "Level Definition (.json)" as LevelDefinition {
+}
+
+object "LevelLoader (tiles-operator)" as LevelLoader #aliceblue {
+    VBO geometry data
+    VBO texture data
+    VAO
+}
+
+object "Renderer" as Renderer #aliceblue {
+}
+
+TextureAtlas -down-> LevelGenerator
+Level -down-> LevelGenerator
+Block2Texture -down-> LevelGenerator
+Input -down-> LevelGenerator
+LevelGenerator -down-> LevelDefinition
+LevelDefinition -down-> LevelLoader
+LevelLoader -down-> Renderer
+
+
+
+@enduml
