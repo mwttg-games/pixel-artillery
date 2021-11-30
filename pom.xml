@@ -13,6 +13,113 @@
         <maven.compiler.target>16</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Dependencies -->
+        <jackson.version>2.13.0</jackson.version>
+        <logback.version>1.2.7</logback.version>
+        <!-- Dependencies for Tests -->
+        <assertJ.version>3.21.0</assertJ.version>
+        <mockito.version>4.1.0</mockito.version>
+        <testng.version>7.4.0</testng.version>
+        <!-- Plugins -->
+        <checkstyle.version>9.1</checkstyle.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- Dependencies for Tests -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertJ.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--- Plant UML Image generator plugin -->
+            <plugin>
+                <groupId>com.github.jeluard</groupId>
+                <artifactId>plantuml-maven-plugin</artifactId>
+                <version>1.2</version>
+                <configuration>
+                    <sourceFiles>
+                        <directory>${basedir}/documentation</directory>
+                        <includes>/**/*.puml</includes>
+                    </sourceFiles>
+                    <outputInSourceDirectory>true</outputInSourceDirectory>
+                    <format>svg</format>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sourceforge.plantuml</groupId>
+                        <artifactId>plantuml</artifactId>
+                        <version>8059</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!-- code formatter checkstyle plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkstyle.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <url>https://github.com/mwttg/level-generator</url>
+    <organization>
+        <name>private</name>
+        <url>https://github.com/mwttg</url>
+    </organization>
+    <developers>
+        <developer>
+            <id>mwttg</id>
+            <email>Marco-Wittig@gmx.de</email>
+        </developer>
+    </developers>
 </project>
