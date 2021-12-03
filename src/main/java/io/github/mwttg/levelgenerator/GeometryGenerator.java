@@ -20,7 +20,7 @@ import java.util.List;
  * f 2/1 3/2 1/3
  * f 2/1 4/4 3/2
  */
-class GeometryGenerator {
+final class GeometryGenerator {
 
   private static final List<Float> DEFAULT_PLANE = Arrays.asList(
       1.0f, 0.0f, 0.0f,
@@ -34,6 +34,12 @@ class GeometryGenerator {
   private GeometryGenerator() {
   }
 
+  /**
+   * The DEFAULT_PLANE geometry data gets shifted by x and y.
+   *
+   * @param x the x coordinate
+   * @param y the y coordinate
+   */
   static List<Float> createTile(int x, int y) {
     var result = new ArrayList<>(DEFAULT_PLANE);
     for (int index = 0; index < SIZE; index++) {

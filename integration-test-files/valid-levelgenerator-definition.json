@@ -1,7 +1,8 @@
 {
   "textureAtlas": {
     "tileSize": 16,
-    "filename": "texture-atlas.png"
+    "width": 48,
+    "height": 48
   },
   "levelBlocks": {
     "blockSize": 10,
