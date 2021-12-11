@@ -26,7 +26,7 @@ public final class ShaderProgram {
    * @param fragmentShaderFile the filename of the fragment shader file in the resource folder
    * @return the OpenGL shader program id
    */
-  public static int create(final String vertexShaderFile, final String fragmentShaderFile) {
+  static int create(final String vertexShaderFile, final String fragmentShaderFile) {
     final var shaderProgramId = GL40.glCreateProgram();
     CleanUpUtilities.addShaderProgramId(shaderProgramId);
 
