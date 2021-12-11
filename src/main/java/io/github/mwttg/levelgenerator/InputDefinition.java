@@ -16,10 +16,10 @@ public record InputDefinition(TextureAtlas textureAtlas, LevelBlocks levelBlocks
                               Map<String, Integer> tileIndexByColor) {
 
   static InputDefinition createFrom(final String filename) throws IOException {
-    final var definitionFile = new File(filename);
+    final var file = new File(filename);
     final var objectMapper = new ObjectMapper();
 
-    return objectMapper.readValue(definitionFile, InputDefinition.class);
+    return objectMapper.readValue(file, InputDefinition.class);
   }
 }
 

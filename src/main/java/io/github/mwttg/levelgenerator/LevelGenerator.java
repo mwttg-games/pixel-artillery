@@ -38,8 +38,12 @@ public class LevelGenerator {
     List<Float> geometry = new ArrayList<>();
     List<Float> textureCoordinates = new ArrayList<>();
 
+    // x, y position inside the level-block image
+    // because of openGL y-coordinate is reverse than image y-coordinate we scan the block image
+    // from bottom to top
     int x = blockSize / 2; // for checking the color in the middle of the block
-    int y = blockSize / 2;
+    int y = dimension.height() - (blockSize / 2);
+    // indexX, indexY position in openGL (the tile position)
     int indexX = 0;
     int indexY = 0;
     do {
@@ -66,9 +70,9 @@ public class LevelGenerator {
       } while (x < dimension.width());
       x = blockSize / 2;
       indexX = 0;
-      y = y + blockSize;
+      y = y - blockSize;
       indexY = indexY + 1;
-    } while (y < dimension.height());
+    } while (y > 0);
 
 
     return new LevelData(geometry.toArray(new Float[0]), textureCoordinates.toArray(new Float[0]));
