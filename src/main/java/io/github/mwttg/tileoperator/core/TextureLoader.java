@@ -5,11 +5,15 @@ import java.io.File;
 import org.lwjgl.opengl.GL40;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Functionality for creating textures.
  */
 public final class TextureLoader {
+
+  private static final Logger LOG = LoggerFactory.getLogger(TextureLoader.class);
 
   /**
    * Creates a texture from an image file from the resource directory.
@@ -18,6 +22,8 @@ public final class TextureLoader {
    * @return the OpenGL id
    */
   public static int createFrom(final String filename) {
+    LOG.debug("Load Texture: '{}'.", filename);
+
     final var stack = MemoryStack.stackPush();
     final var widthBuffer = stack.mallocInt(1);
     final var heightBuffer = stack.mallocInt(1);

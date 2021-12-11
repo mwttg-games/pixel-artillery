@@ -27,7 +27,8 @@ public final class FileUtilities {
    * @return the file's content
    */
   public static List<String> readFromResources(final String filename) {
-    LOG.debug("Read file: " + filename);
+    LOG.debug("Read file: '{}'.", filename);
+
     final var classLoader = ClassLoader.getSystemClassLoader();
     try (final InputStream inputStream = classLoader.getResourceAsStream(filename)) {
       if (inputStream == null) {
