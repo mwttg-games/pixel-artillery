@@ -51,6 +51,10 @@ public final class TextureLoader {
     GL40.glPixelStorei(GL40.GL_UNPACK_ALIGNMENT, 1);
     GL40.glTexImage2D(GL40.GL_TEXTURE_2D, 0, GL40.GL_RGBA, width, height, 0, GL40.GL_RGBA,
         GL40.GL_UNSIGNED_BYTE, buffer);
+    // NEAREST Filtering instead of LINEAR for sharp edges
+    GL40.glTexParameteri(GL40.GL_TEXTURE_2D, GL40.GL_TEXTURE_MIN_FILTER,
+        GL40.GL_NEAREST_MIPMAP_NEAREST);
+    GL40.glTexParameteri(GL40.GL_TEXTURE_2D, GL40.GL_TEXTURE_MAG_FILTER, GL40.GL_NEAREST);
     GL40.glGenerateMipmap(GL40.GL_TEXTURE_2D);
     STBImage.stbi_image_free(buffer);
 
