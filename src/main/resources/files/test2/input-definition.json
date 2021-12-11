@@ -1,0 +1,36 @@
+{
+  "textureAtlas": {
+    "tileSize": 32,
+    "width": 256,
+    "height": 256
+  },
+  "levelBlocks": {
+    "blockSize": 10,
+    "filename": "level-blocks.png"
+  },
+  "tileIndexByColor": {
+    "1E134F": 2,
+    "241D79": 20,
+    "2932A9": 34,
+    "3250CD": 16,
+    "5C79D7": 0,
+    "6E9ADC": 4,
+    "A4C9E9": 36,
+    "D5EAF5": 32,
+    "E7F5F9": 40,
+    "D640B3": 18,
+    "10432E": 9,
+    "176139": 10,
+    "1F7F3D": 11,
+    "27A344": 17,
+    "31CE44": 19,
+    "A9E698": 25,
+    "C8EDAF": 26,
+    "D9F3C8": 27,
+    "E7F7DA": 18,
+    "A1A1A1": 5,
+    "8B8B8B": 6,
+    "717171": 14,
+    "525252": 13
+  }
+}

@@ -14,11 +14,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Dependencies -->
-        <tilesOperator.version>0.0.1-SNAPSHOT</tilesOperator.version>
+        <jackson.version>2.13.0</jackson.version>
+        <joml.version>1.10.2</joml.version>
         <logback.version>1.2.7</logback.version>
+        <tilesOperator.version>0.0.1-SNAPSHOT</tilesOperator.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.github.mwttg</groupId>
             <artifactId>tiles-operator</artifactId>
@@ -28,6 +35,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.joml</groupId>
+            <artifactId>joml</artifactId>
+            <version>${joml.version}</version>
         </dependency>
     </dependencies>
 
