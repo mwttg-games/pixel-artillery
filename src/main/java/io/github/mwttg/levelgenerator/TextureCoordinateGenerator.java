@@ -67,8 +67,8 @@ class TextureCoordinateGenerator {
    * UVs for a tile ( = 2 triangles).
    */
   List<Float> createTextureCoordinates(final int tileIndex) {
-    final var tileRow = (tileIndex) / tilesPerRow;
-    final var tileColumn = (tileIndex) % tilesPerRow;
+    final var tileRow = tileIndex / tilesPerRow;
+    final var tileColumn = tileIndex % tilesPerRow;
 
     final var right = (float) ((tileColumn * tileSize) + tileSize) / (float) width;
     final var bottom = 1.0f - ((float) ((tileRow * tileSize) + tileSize) / (float) height);

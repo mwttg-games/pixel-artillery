@@ -38,16 +38,16 @@ public class LevelGenerator {
     List<Float> geometry = new ArrayList<>();
     List<Float> textureCoordinates = new ArrayList<>();
 
-    // x, y position inside the level-block image
-    // because of openGL y-coordinate is reverse than image y-coordinate we scan the block image
-    // from bottom to top
-    int x = blockSize / 2; // for checking the color in the middle of the block
-    int y = dimension.height() - (blockSize / 2);
+    // x, y position inside the level-block image (for loop)
     // indexX, indexY position in openGL (the tile position)
-    int indexX = 0;
+    // because of openGL y-coordinate is reverse than image (png) y-coordinate we scan the
+    // block image from bottom to top (outer for loop)
+    int indexX = -1;
     int indexY = 0;
-    do {
-      do {
+    //  blockSize / 2 for checking the color in the middle of the block (of the block image)
+    for (int y = dimension.height() - (blockSize / 2); y > 0; y = y - blockSize) {
+      for (int x = blockSize / 2; x < dimension.width(); x = x + blockSize) {
+        indexX = indexX + 1;
         final var color = imageProcessor.getColorOnPosition(x, y);
         final var tileIndex = indexByColor.get(color);
         if (tileIndex == null) {
@@ -55,7 +55,7 @@ public class LevelGenerator {
               "No mapping tile (from TileAtlas) found for color '{}'. "
                   + "Position was x = '{}', y = '{}'.",
               color, indexX, indexY);
-          break;
+          continue;
         }
 
         final var tile = GeometryGenerator.createTile(indexX, indexY);
@@ -64,16 +64,10 @@ public class LevelGenerator {
         final var texture = textureGenerator.createTextureCoordinates(tileIndex);
         textureCoordinates = Stream.concat(textureCoordinates.stream(), texture.stream())
             .collect(Collectors.toList());
-
-        x = x + blockSize;
-        indexX = indexX + 1;
-      } while (x < dimension.width());
-      x = blockSize / 2;
-      indexX = 0;
-      y = y - blockSize;
+      }
+      indexX = -1;
       indexY = indexY + 1;
-    } while (y > 0);
-
+    }
 
     return new LevelData(geometry.toArray(new Float[0]), textureCoordinates.toArray(new Float[0]));
   }

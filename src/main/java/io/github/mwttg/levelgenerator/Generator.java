@@ -14,7 +14,8 @@ public class Generator {
   public static void main(String[] args) throws IOException {
     // final var currentDirectory = System.getProperty("user.dir");
     // final var directory = currentDirectory + "/integration-test-files/";
-    final var directory = "/Users/mwittig/development/private/tiles-operator-test/src/main/resources/files/test2/";
+    final var directory =
+        "/Users/mwittig/development/private/tiles-operator-test/src/main/resources/files/test2/";
     final var definitionFilename = "input-definition.json";
     final var inputDefinition = InputDefinition.createFrom(directory + definitionFilename);
     final var blockFile = new File(directory + inputDefinition.levelBlocks().filename());

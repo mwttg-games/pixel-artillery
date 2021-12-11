@@ -45,10 +45,10 @@ final class GeometryGenerator {
     for (int index = 0; index < SIZE; index++) {
       var value = result.get(index);
       if (index % 3 == 0) {
-        result.set(index, value + x);
+        result.set(index, value + (float) x);
       }
       if ((index + 2) % 3 == 0) {
-        result.set(index, value + y);
+        result.set(index, value + (float) y);
       }
     }
 
