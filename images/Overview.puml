@@ -1,0 +1,30 @@
+@startuml
+allow_mixing
+
+package "definition file" as definition {
+    object  ".json" as content1 {
+        - texture atlas info
+        - level block info
+        - color map
+    }
+}
+
+package "level block file" as blocks {
+    object ".png" as content2{
+      - color-coded level stucture
+    }
+}
+
+node "level-generator" as generator
+
+package "output file" as output {
+    object ".json" as content3 {
+        - float[] vertices (geometry)
+        - float[] UVs (texture coordinates)
+    }
+}
+
+content1 -down-> generator
+content2 -down-> generator
+generator -down-> content3
+@enduml
