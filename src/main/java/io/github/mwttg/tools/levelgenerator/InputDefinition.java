@@ -1,12 +1,13 @@
 package io.github.mwttg.tools.levelgenerator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.mwttg.tools.LevelTilesGenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 /**
- * This represents the definition file for the {@link LevelGenerator}.
+ * This represents the definition file for the {@link LevelTilesGenerator}.
  *
  * @param textureAtlas     the texture atlas
  * @param levelBlocks      the level blocks
