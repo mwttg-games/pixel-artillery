@@ -15,7 +15,7 @@ public class LevelTilesGenerator {
    */
   public static void main(String[] args) throws IOException {
     // final var currentDirectory = System.getProperty("user.dir");
-    // final var directory = currentDirectory + "/integration-test-files/";
+    // final var directory = currentDirectory + "/integration-test-files/level";
     final var directory =
         "/Users/mwittig/development/private/tiles-operator-test/src/main/resources/files/test2/";
     final var definitionFilename = "input-definition.json";

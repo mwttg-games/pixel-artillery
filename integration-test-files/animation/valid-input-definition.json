@@ -1,0 +1,9 @@
+{
+  "textureAtlas": {
+    "tileSize": 16,
+    "width": 48,
+    "height": 48
+  },
+  "animationSteps": 2,
+  "planeSize": 3.4
+}

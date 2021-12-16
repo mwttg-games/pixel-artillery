@@ -14,7 +14,7 @@ public class ImageProcessorTest {
   @BeforeMethod
   public void setup() throws IOException {
     final var currentDirectory = System.getProperty("user.dir");
-    final var file = new File(currentDirectory + "/integration-test-files/image.png");
+    final var file = new File(currentDirectory + "/integration-test-files/level/image.png");
     subject = new ImageProcessor(file);
   }
 

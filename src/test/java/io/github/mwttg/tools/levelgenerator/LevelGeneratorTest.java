@@ -16,7 +16,8 @@ public class LevelGeneratorTest {
   @BeforeMethod
   public void setup() throws IOException {
     final var currentDirectory = System.getProperty("user.dir");
-    final var blockFile = new File(currentDirectory + "/integration-test-files/level-blocks2.png");
+    final var blockFile =
+        new File(currentDirectory + "/integration-test-files/level/level-blocks2.png");
 
     final var inputDefinition = inputDefinition();
     subject = new LevelGenerator(inputDefinition, blockFile);

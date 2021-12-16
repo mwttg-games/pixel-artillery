@@ -19,10 +19,10 @@ final class GeometryGenerator {
    * @param y the y coordinate
    */
   static List<Float> createTile(int x, int y) {
-    var defaultPlane = TilesFactory.createDefaultTile();
+    final var defaultPlane = TilesFactory.createDefaultTile();
     var result = new ArrayList<>(defaultPlane);
     for (int index = 0; index < defaultPlane.size(); index++) {
-      var value = result.get(index);
+      final var value = result.get(index);
       if (index % 3 == 0) {
         result.set(index, value + (float) x);
       }

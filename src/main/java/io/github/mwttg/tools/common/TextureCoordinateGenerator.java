@@ -48,7 +48,6 @@ import java.util.List;
  * (0.0, 0.0)                 (1.0, 0.0)
  */
 // @formatter:on
-
 public final class TextureCoordinateGenerator {
 
   private final int tileSize;
@@ -56,6 +55,11 @@ public final class TextureCoordinateGenerator {
   private final int height;
   private final int tilesPerRow;
 
+  /**
+   * The Constructor.
+   *
+   * @param atlas the {@link TextureAtlas}
+   */
   public TextureCoordinateGenerator(final TextureAtlas atlas) {
     this.tileSize = atlas.tileSize();
     this.width = atlas.width();
