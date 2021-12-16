@@ -1,4 +1,4 @@
-package io.github.mwttg.tools.levelgenerator;
+package io.github.mwttg.tools.common;
 
 import java.util.List;
 
@@ -49,14 +49,14 @@ import java.util.List;
  */
 // @formatter:on
 
-class TextureCoordinateGenerator {
+public final class TextureCoordinateGenerator {
 
   private final int tileSize;
   private final int width;
   private final int height;
   private final int tilesPerRow;
 
-  TextureCoordinateGenerator(final TextureAtlas atlas) {
+  public TextureCoordinateGenerator(final TextureAtlas atlas) {
     this.tileSize = atlas.tileSize();
     this.width = atlas.width();
     this.height = atlas.height();
@@ -66,7 +66,7 @@ class TextureCoordinateGenerator {
   /**
    * UVs for a tile ( = 2 triangles).
    */
-  List<Float> createTextureCoordinates(final int tileIndex) {
+  public List<Float> createTextureCoordinates(final int tileIndex) {
     final var tileRow = tileIndex / tilesPerRow;
     final var tileColumn = tileIndex % tilesPerRow;
 

@@ -1,5 +1,6 @@
 package io.github.mwttg.tools.levelgenerator;
 
+import io.github.mwttg.tools.common.TextureCoordinateGenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

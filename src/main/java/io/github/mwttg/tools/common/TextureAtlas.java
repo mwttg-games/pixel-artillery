@@ -1,4 +1,4 @@
-package io.github.mwttg.tools.levelgenerator;
+package io.github.mwttg.tools.common;
 
 /**
  * This is one part of the input of the LevelGenerator (output .json file).

@@ -2,6 +2,7 @@ package io.github.mwttg.tools.levelgenerator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mwttg.tools.LevelTilesGenerator;
+import io.github.mwttg.tools.common.TextureAtlas;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;

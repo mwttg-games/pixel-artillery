@@ -2,6 +2,7 @@ package io.github.mwttg.tools.levelgenerator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import io.github.mwttg.tools.common.TextureAtlas;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;

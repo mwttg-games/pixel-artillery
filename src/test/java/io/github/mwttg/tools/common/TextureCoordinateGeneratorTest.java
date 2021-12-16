@@ -1,4 +1,4 @@
-package io.github.mwttg.tools.levelgenerator;
+package io.github.mwttg.tools.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
