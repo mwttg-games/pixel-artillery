@@ -1,4 +1,4 @@
-package io.github.mwttg.levelgenerator;
+package io.github.mwttg.tools.levelgenerator;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

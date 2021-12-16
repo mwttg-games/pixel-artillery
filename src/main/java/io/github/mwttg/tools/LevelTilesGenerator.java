@@ -1,12 +1,14 @@
-package io.github.mwttg.levelgenerator;
+package io.github.mwttg.tools;
 
+import io.github.mwttg.tools.levelgenerator.InputDefinition;
+import io.github.mwttg.tools.levelgenerator.LevelGenerator;
 import java.io.File;
 import java.io.IOException;
 
 /**
  * Generates level data.
  */
-public class Generator {
+public class LevelTilesGenerator {
 
   /**
    * This is the main function ;) .

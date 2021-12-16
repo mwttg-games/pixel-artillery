@@ -1,4 +1,4 @@
-package io.github.mwttg.levelgenerator;
+package io.github.mwttg.tools.levelgenerator;
 
 /**
  * Tuple class for holding the dimension of the block file.

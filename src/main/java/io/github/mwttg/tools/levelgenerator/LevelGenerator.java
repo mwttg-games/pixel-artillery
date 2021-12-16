@@ -1,4 +1,4 @@
-package io.github.mwttg.levelgenerator;
+package io.github.mwttg.tools.levelgenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,14 @@ public class LevelGenerator {
   private final Dimension dimension;
   private final int blockSize;
 
-  LevelGenerator(final InputDefinition inputDefinition, final File blockFile)
+  /**
+   * Constructor.
+   *
+   * @param inputDefinition the {@link InputDefinition}
+   * @param blockFile       the level as a block image (.png)
+   * @throws IOException when I/O foes wrong
+   */
+  public LevelGenerator(final InputDefinition inputDefinition, final File blockFile)
       throws IOException {
     final var textureAtlas = inputDefinition.textureAtlas();
     this.indexByColor = inputDefinition.tileIndexByColor();
@@ -34,7 +41,12 @@ public class LevelGenerator {
     this.blockSize = inputDefinition.levelBlocks().blockSize();
   }
 
-  LevelData create() {
+  /**
+   * Creates the {@link LevelData}.
+   *
+   * @return {@link LevelData}
+   */
+  public LevelData create() {
     List<Float> geometry = new ArrayList<>();
     List<Float> textureCoordinates = new ArrayList<>();
 

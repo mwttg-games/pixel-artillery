@@ -1,4 +1,4 @@
-package io.github.mwttg.levelgenerator;
+package io.github.mwttg.tools.levelgenerator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
@@ -15,7 +15,7 @@ public record LevelData(Float[] tilesGeometry, Float[] textureCoordinates) {
    * @param destination path and filename
    * @throws IOException if IO error happens
    */
-  void writeToFile(final String destination) throws IOException {
+  public void writeToFile(final String destination) throws IOException {
     final var outputFile = new File(destination);
     final var objectMapper = new ObjectMapper();
     objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, this);
