@@ -19,6 +19,31 @@ public final class TexturedRenderer {
   }
 
   /**
+   * Draws a textured entity to the screen, but you can decide which part of the entity by using
+   * first and count. This can be used for animations e.g. use 3 times the same plane as geometry
+   * data and 3 different texture coordinates for these planes and then use first and count to
+   * switch between them.
+   *
+   * @param matrixStack         the model-, view- and projection-matrix
+   * @param vertexArrayObjectId the VAO id (containing VBO of geometry and VBO for texture
+   *                            coordinates)
+   * @param textureId           the id of the texture
+   * @param first               the first data point (geometry and texture) of the entity
+   * @param count               how many data point (geometry and texture) to draw the entity
+   */
+  public void draw(final MatrixStack matrixStack, final int vertexArrayObjectId,
+                   final int textureId, final int first, final int count) {
+    GL40.glBindVertexArray(vertexArrayObjectId);
+    GL40.glUseProgram(shaderProgramId);
+    enableVertexAttribArray();
+
+    uniforms.upload(matrixStack, textureId);
+    GL40.glDrawArrays(GL40.GL_TRIANGLES, first, count);
+
+    disableVertexAttribArray();
+  }
+
+  /**
    * Draws a textured entity to the screen.
    *
    * @param matrixStack         the model-, view- and projection-matrix
@@ -30,14 +55,7 @@ public final class TexturedRenderer {
    */
   public void draw(final MatrixStack matrixStack, final int vertexArrayObjectId,
                    final int textureId, final int size) {
-    GL40.glBindVertexArray(vertexArrayObjectId);
-    GL40.glUseProgram(shaderProgramId);
-    enableVertexAttribArray();
-
-    uniforms.upload(matrixStack, textureId);
-    GL40.glDrawArrays(GL40.GL_TRIANGLES, 0, size);
-
-    disableVertexAttribArray();
+    draw(matrixStack, vertexArrayObjectId, textureId, 0, size);
   }
 
   private void enableVertexAttribArray() {
