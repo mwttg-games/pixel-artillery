@@ -5,7 +5,7 @@ import io.github.mwttg.tileoperator.core.VertexArrayObject;
 import io.github.mwttg.tileoperator.core.render.MatrixStack;
 import io.github.mwttg.tileoperator.core.render.textured.TexturedRenderer;
 import io.github.mwttg.tileoperator.window.Configuration;
-import io.github.mwttg.tilesoperatortest.test2.levelloader.LevelData;
+import io.github.mwttg.tilesoperatortest.FileReader;
 import java.io.IOException;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -21,7 +21,7 @@ public class MainLoop {
 
   public MainLoop(final Configuration configuration) throws IOException {
     // create OpenGL ids
-    final var levelData = LevelData.createFrom("files/test2/level.json");
+    final var levelData = FileReader.createFrom("files/test2/level.json", LevelData.class);
     this.vaoId =
         VertexArrayObject.create(levelData.tilesGeometry(), levelData.textureCoordinates());
     this.textureId = TextureLoader.createFrom("files/test2/texture-atlas.png");
