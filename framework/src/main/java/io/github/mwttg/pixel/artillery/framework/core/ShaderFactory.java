@@ -14,7 +14,7 @@ public final class ShaderFactory {
    * @return shader program id
    */
   public static int createTextureShader() {
-    return ShaderProgram.create("shaders/textured/vertex-shader.glsl",
-        "shaders/textured/fragment-shader.glsl");
+    return ShaderProgram.create("/shaders/textured/vertex-shader.glsl",
+        "/shaders/textured/fragment-shader.glsl");
   }
 }

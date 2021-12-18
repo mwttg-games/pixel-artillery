@@ -1,6 +1,6 @@
 package io.github.mwttg.pixel.artillery.examples.example03;
 
-import io.github.mwttg.pixel.artillery.examples.FileReader;
+import io.github.mwttg.pixel.artillery.common.ReadFile;
 import io.github.mwttg.pixel.artillery.framework.core.TextureLoader;
 import io.github.mwttg.pixel.artillery.framework.core.VertexArrayObject;
 import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
@@ -21,9 +21,9 @@ public class MainLoop {
   private final int textureId;
   private final List<AnimationStep> animationSteps;
 
-  public MainLoop(final Configuration configuration) throws IOException {
+  public MainLoop(final Configuration configuration) {
     // create OpenGL ids
-    final var animation = FileReader.createFrom("files/example03/animation.json", Animation.class);
+    final var animation = ReadFile.jsonFromResources("files/example03/animation.json", Animation.class);
     this.vaoId =
         VertexArrayObject.create(animation.tilesGeometry(), animation.textureCoordinates());
     this.textureId = TextureLoader.createFrom("files/example03/animation.png");

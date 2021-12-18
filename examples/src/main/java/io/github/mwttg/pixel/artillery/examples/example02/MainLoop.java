@@ -1,6 +1,6 @@
 package io.github.mwttg.pixel.artillery.examples.example02;
 
-import io.github.mwttg.pixel.artillery.examples.FileReader;
+import io.github.mwttg.pixel.artillery.common.ReadFile;
 import io.github.mwttg.pixel.artillery.framework.core.TextureLoader;
 import io.github.mwttg.pixel.artillery.framework.core.VertexArrayObject;
 import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
@@ -19,9 +19,9 @@ public class MainLoop {
   private final int textureId;
   private final int size;
 
-  public MainLoop(final Configuration configuration) throws IOException {
+  public MainLoop(final Configuration configuration) {
     // create OpenGL ids
-    final var levelData = FileReader.createFrom("files/example02/level.json", LevelData.class);
+    final var levelData = ReadFile.jsonFromResources("files/example02/level.json", LevelData.class);
     this.vaoId =
         VertexArrayObject.create(levelData.tilesGeometry(), levelData.textureCoordinates());
     this.textureId = TextureLoader.createFrom("files/example02/texture-atlas.png");

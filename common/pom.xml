@@ -9,25 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tools</artifactId>
+    <artifactId>common</artifactId>
 
-    <name>Pixel Art(illery) - Tools</name>
-    <description>Some Tools for the Pixel Art(illery) framework</description>
+    <name>Pixel Art(illery) - common</name>
+    <description>Shared lib for the Pixel Art(illery)</description>
     <inceptionYear>2021</inceptionYear>
 
     <dependencies>
         <dependency>
-            <groupId>io.github.mwttg</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
         </dependency>
         <!-- Dependencies for Tests -->
         <dependency>

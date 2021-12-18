@@ -1,5 +1,6 @@
 package io.github.mwttg.pixel.artillery.framework.core;
 
+import io.github.mwttg.pixel.artillery.common.ReadFile;
 import io.github.mwttg.pixel.artillery.framework.CleanUpUtilities;
 import io.github.mwttg.pixel.artillery.framework.window.GameWindow;
 import java.util.List;
@@ -30,8 +31,8 @@ public final class ShaderProgram {
     final var shaderProgramId = GL40.glCreateProgram();
     CleanUpUtilities.addShaderProgramId(shaderProgramId);
 
-    final var vertexShaderCode = FileUtilities.readFromResources(vertexShaderFile);
-    final var fragmentShaderCode = FileUtilities.readFromResources(fragmentShaderFile);
+    final var vertexShaderCode = ReadFile.fromResources(vertexShaderFile);
+    final var fragmentShaderCode = ReadFile.fromResources(fragmentShaderFile);
     final var vertexShaderId = compileShader(vertexShaderCode, GL40.GL_VERTEX_SHADER);
     final var fragmentShaderId = compileShader(fragmentShaderCode, GL40.GL_FRAGMENT_SHADER);
     CleanUpUtilities.addShaderId(vertexShaderId);
