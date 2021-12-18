@@ -1,0 +1,16 @@
+{
+  "textureAtlas": {
+    "tileSize": 16,
+    "width": 48,
+    "height": 48
+  },
+  "levelBlocks": {
+    "blockSize": 10,
+    "filename": "level-blocks.png"
+  },
+  "tileIndexByColor": {
+    "FF0046": 0,
+    "37FF00": 1,
+    "0077FF": 2
+  }
+}

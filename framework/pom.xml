@@ -11,7 +11,7 @@
 
     <artifactId>pixel-artillery</artifactId>
 
-    <name>Pixel Art(illery) - framework</name>
+    <name>Pixel Art(illery) - Framework/Engine</name>
     <description>The framework for 2D games based on LWJGL</description>
     <inceptionYear>2021</inceptionYear>
 
