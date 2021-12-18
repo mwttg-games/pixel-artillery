@@ -13,7 +13,7 @@ public class Example01 {
   public static void main(String[] args) throws IOException {
     final var configuration = ExampleConfiguration.create();
     final var gameWindowId = GameWindow.create(configuration);
-    final var mainLoop = new MainLoop(configuration);
+    final var mainLoop = new MainLoop();
     mainLoop.loop(gameWindowId);
     CleanUpUtilities.purge();
   }

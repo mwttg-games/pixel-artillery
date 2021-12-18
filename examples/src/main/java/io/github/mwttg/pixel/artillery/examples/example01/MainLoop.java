@@ -1,15 +1,11 @@
 package io.github.mwttg.pixel.artillery.examples.example01;
 
-import io.github.mwttg.pixel.artillery.framework.window.Configuration;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL40;
 
 public class MainLoop {
 
-  private final Configuration configuration;
-
-  public MainLoop(final Configuration configuration) {
-    this.configuration = configuration;
+  public MainLoop() {
   }
 
   public void loop(final long gameWindowId) {
