@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>Pixel Art(illery)</name>
+    <name>Pixel Art(illery) - root</name>
     <description>A framework for 2D games with tools and examples</description>
     <inceptionYear>2021</inceptionYear>
 
