@@ -15,7 +15,7 @@ public record SpriteData(float[] vertices, float[] textureCoordinates) {
   private static final Logger LOG = LoggerFactory.getLogger(SpriteData.class);
 
   /**
-   * Helper function, becuase someone forgot to implement a float stream in Java (for double
+   * Helper function, because someone forgot to implement a float stream in Java (for double
    * it exists).
    *
    * @param items the collection of {@link Float} numbers

@@ -11,7 +11,7 @@ import io.github.mwttg.pixel.artillery.framework.core.VertexArrayObject;
 public record Sprite(int vertexArrayObjectId, int textureId, int size) {
 
   /**
-   * Creates a Sprite (OpenGL ids & sze) from a .json file and a texture file (.png).
+   * Creates a Sprite (OpenGL ids & size) from a .json file and a texture file (.png).
    *
    * @param jsonFile the .json file inside the resource folder
    * @param textureFile the image (.png) file inside the resource folder
