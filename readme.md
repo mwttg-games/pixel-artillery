@@ -11,6 +11,7 @@ The repository includes several Maven modules:
 
 | Module    | Description                                                                      |
 | --------- | -------------------------------------------------------------------------------- |
+| common    | a collection of classes used in multiple modules (extracted similarities)        |
 | examples  | a short introduction on, how to use the framework                                |
 | framework | the framework itself aka 'The Engine' aka 'The Heart' aka 'The Root of all Evil' |
 | tools     | some tools for making the creation of games easier                               |
