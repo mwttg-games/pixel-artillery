@@ -21,7 +21,7 @@ public final class TextureLoader {
    * @param filename of that image file
    * @return the OpenGL id
    */
-  public static int createFrom(final String filename) {
+  public static int createFromResource(final String filename) {
     LOG.debug("Load Texture: '{}'.", filename);
 
     final var stack = MemoryStack.stackPush();

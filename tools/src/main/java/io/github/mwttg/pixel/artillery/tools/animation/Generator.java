@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Generates the geometry and texture data for an animation for OpenGL.
+ * Generates the vertices and texture data for an animation for OpenGL.
  * The data is stored in float arrays which can be used to create OpenGL Vertex Array Objects.
  */
 public class Generator {

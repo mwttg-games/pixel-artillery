@@ -2,6 +2,7 @@ package io.github.mwttg.pixel.artillery.framework.core.render.textured;
 
 import io.github.mwttg.pixel.artillery.framework.core.ShaderFactory;
 import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
+import io.github.mwttg.pixel.artillery.framework.core.sprites.Sprite;
 import org.lwjgl.opengl.GL40;
 
 
@@ -44,7 +45,7 @@ public final class TexturedRenderer {
   }
 
   /**
-   * Draws a textured entity to the screen.
+   * Draws a textured entity on the screen.
    *
    * @param matrixStack         the model-, view- and projection-matrix
    * @param vertexArrayObjectId the VAO id (containing VBO of geometry and VBO for texture
@@ -56,6 +57,20 @@ public final class TexturedRenderer {
   public void draw(final MatrixStack matrixStack, final int vertexArrayObjectId,
                    final int textureId, final int size) {
     draw(matrixStack, vertexArrayObjectId, textureId, 0, size);
+  }
+
+  /**
+   * Draws a textured entity on the screen.
+   *
+   * @param matrixStack the model-, view- and projection-matrix
+   * @param sprite      the sprite (data e.g. ids and size)
+   */
+  public void draw(final MatrixStack matrixStack, final Sprite sprite) {
+    final var vertexArrayObjectId = sprite.vertexArrayObjectId();
+    final var textureId = sprite.textureId();
+    final var size = sprite.size();
+
+    draw(matrixStack, vertexArrayObjectId, textureId, size);
   }
 
   private void enableVertexAttribArray() {

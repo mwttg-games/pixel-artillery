@@ -1,5 +1,6 @@
 package io.github.mwttg.pixel.artillery.framework.core;
 
+import io.github.mwttg.pixel.artillery.common.SpriteData;
 import io.github.mwttg.pixel.artillery.framework.CleanUpUtilities;
 import org.lwjgl.opengl.GL40;
 
@@ -33,5 +34,18 @@ public final class VertexArrayObject {
     GL40.glVertexAttribPointer(1, 2, GL40.GL_FLOAT, false, 0, 0);
 
     return id;
+  }
+
+  /**
+   * Creates a VertexArrayObject (Object which hold all needed VertexBufferObject) from the Tuple
+   * {@link SpriteData}.
+   *
+   * @param spriteData the sprite data
+   * @return the OpenGl id
+   */
+  public static int create(final SpriteData spriteData) {
+    final var vertices = spriteData.vertices();
+    final var textureCoordinates = spriteData.textureCoordinates();
+    return create(vertices, textureCoordinates);
   }
 }

@@ -1,5 +1,6 @@
 package io.github.mwttg.pixel.artillery.tools.level;
 
+import io.github.mwttg.pixel.artillery.common.SpriteData;
 import io.github.mwttg.pixel.artillery.tools.common.TextureCoordinateGenerator;
 import java.io.File;
 import java.io.IOException;
@@ -43,11 +44,11 @@ public class LevelGenerator {
   }
 
   /**
-   * Creates the {@link LevelData}.
+   * Creates the {@link SpriteData}.
    *
-   * @return {@link LevelData}
+   * @return {@link SpriteData}
    */
-  public LevelData create() {
+  public SpriteData create() {
     List<Float> geometry = new ArrayList<>();
     List<Float> textureCoordinates = new ArrayList<>();
 
@@ -82,6 +83,7 @@ public class LevelGenerator {
       indexY = indexY + 1;
     }
 
-    return new LevelData(geometry.toArray(new Float[0]), textureCoordinates.toArray(new Float[0]));
+    return new SpriteData(SpriteData.toFloatArray(geometry),
+        SpriteData.toFloatArray(textureCoordinates));
   }
 }

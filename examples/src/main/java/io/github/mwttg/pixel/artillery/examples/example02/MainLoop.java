@@ -1,12 +1,9 @@
 package io.github.mwttg.pixel.artillery.examples.example02;
 
-import io.github.mwttg.pixel.artillery.common.ReadFile;
-import io.github.mwttg.pixel.artillery.framework.core.TextureLoader;
-import io.github.mwttg.pixel.artillery.framework.core.VertexArrayObject;
 import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
 import io.github.mwttg.pixel.artillery.framework.core.render.textured.TexturedRenderer;
+import io.github.mwttg.pixel.artillery.framework.core.sprites.Sprite;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
-import java.io.IOException;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL40;
@@ -15,17 +12,12 @@ public class MainLoop {
   private final MatrixStack matrixStack;
   private final TexturedRenderer texturedRenderer;
 
-  private final int vaoId;
-  private final int textureId;
-  private final int size;
+  private final Sprite sprite;
 
   public MainLoop(final Configuration configuration) {
-    // create OpenGL ids
-    final var levelData = ReadFile.jsonFromResources("files/example02/level.json", LevelData.class);
-    this.vaoId =
-        VertexArrayObject.create(levelData.tilesGeometry(), levelData.textureCoordinates());
-    this.textureId = TextureLoader.createFrom("files/example02/texture-atlas.png");
-    this.size = levelData.tilesGeometry().length / 3;
+    final var jsonFile = "files/example02/level.json";
+    final var textureFile = "files/example02/texture-atlas.png";
+    this.sprite = Sprite.fromResources(jsonFile, textureFile);
 
     // MatrixStack & Renderer
     final var modelMatrix = new Matrix4f().translate(0, 0, 0);
@@ -41,7 +33,7 @@ public class MainLoop {
     while (!GLFW.glfwWindowShouldClose(gameWindowId)) {
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
 
-      texturedRenderer.draw(matrixStack, vaoId, textureId, size);
+      texturedRenderer.draw(matrixStack, sprite);
 
       GLFW.glfwPollEvents();
       GLFW.glfwSwapBuffers(gameWindowId);

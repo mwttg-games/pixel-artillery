@@ -6,7 +6,6 @@ import io.github.mwttg.pixel.artillery.framework.core.VertexArrayObject;
 import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
 import io.github.mwttg.pixel.artillery.framework.core.render.textured.TexturedRenderer;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
-import java.io.IOException;
 import java.util.List;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -26,7 +25,7 @@ public class MainLoop {
     final var animation = ReadFile.jsonFromResources("files/example03/animation.json", Animation.class);
     this.vaoId =
         VertexArrayObject.create(animation.tilesGeometry(), animation.textureCoordinates());
-    this.textureId = TextureLoader.createFrom("files/example03/animation.png");
+    this.textureId = TextureLoader.createFromResource("files/example03/animation.png");
     this.animationSteps =
         List.of(new AnimationStep(0, 6), new AnimationStep(6, 6), new AnimationStep(12, 6),
             new AnimationStep(18, 6));

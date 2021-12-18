@@ -27,7 +27,7 @@ public class LevelGeneratorTest {
   public void testCreate() {
     final var actual = subject.create();
 
-    assertThat(actual.tilesGeometry()).containsExactly(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+    assertThat(actual.vertices()).containsExactly(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     assertThat(actual.textureCoordinates()).containsExactly(0.33333334f, 0.6666666f, 0.0f, 1.0f,
         0.0f, 0.6666666f, 0.33333334f, 0.6666666f, 0.33333334f, 1.0f, 0.0f, 1.0f);
