@@ -5,9 +5,9 @@ import io.github.mwttg.pixel.artillery.framework.window.GameWindowConfiguration;
 import io.github.mwttg.pixel.artillery.framework.window.OpenGlConfiguration;
 import io.github.mwttg.pixel.artillery.framework.window.ViewPortConfiguration;
 
-public class TilesOperatorConfiguration {
+public class ExampleConfiguration {
 
-  private TilesOperatorConfiguration() {
+  private ExampleConfiguration() {
   }
 
   public static Configuration create() {
