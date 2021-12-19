@@ -5,5 +5,6 @@
     "height": 64
   },
   "animationSteps": 4,
+  "delayInMs": 500,
   "planeSize": 2
 }

@@ -1,8 +1,5 @@
 package io.github.mwttg.pixel.artillery.common;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * A Tuple class for vertices and texture coordinates.
  */
-public record SpriteData(float[] vertices, float[] textureCoordinates) {
+public record SpriteData(float[] vertices, float[] textureCoordinates) implements WriteToFile {
 
   private static final Logger LOG = LoggerFactory.getLogger(SpriteData.class);
 
@@ -29,20 +26,5 @@ public record SpriteData(float[] vertices, float[] textureCoordinates) {
     }
 
     return result;
-  }
-
-  /**
-   * Writes the sprite data to a json file.
-   *
-   * @param filename path and filename
-   */
-  public void writeToFile(final String filename) {
-    final var outputFile = new File(filename);
-    final var objectMapper = new ObjectMapper();
-    try {
-      objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, this);
-    } catch (final IOException exception) {
-      LOG.error("Can't write Sprite data to .json file '{}'. Exception was: ", filename, exception);
-    }
   }
 }

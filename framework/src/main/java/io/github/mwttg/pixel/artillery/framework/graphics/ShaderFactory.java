@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.framework.core;
+package io.github.mwttg.pixel.artillery.framework.graphics;
 
 /**
  * Helper Class for creating shader program ids.

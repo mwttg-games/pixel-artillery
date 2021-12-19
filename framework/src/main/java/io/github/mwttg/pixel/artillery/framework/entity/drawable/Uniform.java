@@ -1,5 +1,6 @@
-package io.github.mwttg.pixel.artillery.framework.core.render;
+package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
+import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
 import java.nio.FloatBuffer;
 import java.util.Map;
 import org.joml.Matrix4f;
@@ -9,7 +10,7 @@ import org.lwjgl.opengl.GL40;
 /**
  * Handle Uniforms (activate / upload).
  */
-public interface Uniform {
+interface Uniform {
 
   int CAPACITY = 16;
   FloatBuffer MATRIX_BUFFER = BufferUtils.createFloatBuffer(CAPACITY);

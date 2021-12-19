@@ -1,12 +1,9 @@
 package io.github.mwttg.pixel.artillery.examples.example03;
 
-import io.github.mwttg.pixel.artillery.common.ReadFile;
-import io.github.mwttg.pixel.artillery.framework.core.TextureLoader;
-import io.github.mwttg.pixel.artillery.framework.core.VertexArrayObject;
-import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
-import io.github.mwttg.pixel.artillery.framework.core.render.textured.TexturedRenderer;
+import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
+import io.github.mwttg.pixel.artillery.framework.entity.Entity;
+import io.github.mwttg.pixel.artillery.framework.entity.drawable.SpriteAnimation;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
-import java.util.List;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL40;
@@ -14,53 +11,28 @@ import org.lwjgl.opengl.GL40;
 public class MainLoop {
 
   private final MatrixStack matrixStack;
-  private final TexturedRenderer texturedRenderer;
-
-  private final int vaoId;
-  private final int textureId;
-  private final List<AnimationStep> animationSteps;
+  private final Entity entity;
 
   public MainLoop(final Configuration configuration) {
-    // create OpenGL ids
-    final var animation = ReadFile.jsonFromResources("files/example03/animation.json", Animation.class);
-    this.vaoId =
-        VertexArrayObject.create(animation.tilesGeometry(), animation.textureCoordinates());
-    this.textureId = TextureLoader.createFromResource("files/example03/animation.png");
-    this.animationSteps =
-        List.of(new AnimationStep(0, 6), new AnimationStep(6, 6), new AnimationStep(12, 6),
-            new AnimationStep(18, 6));
+    final var jsonFile = "files/example03/animation.json";
+    final var textureFile = "files/example03/animation.png";
+    final var drawable = new SpriteAnimation(jsonFile, textureFile);
+    this.entity = new Entity.EntityBuilder().addDrawable(drawable).build();
 
-    // MatrixStack & Renderer
+    // MatrixStack
     final var modelMatrix = new Matrix4f().translate(10, 10, 0);
     final var viewMatrix =
         (new Matrix4f()).setLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     final var projectionMatrix = createOrtho2DMatrix(configuration);
     this.matrixStack = new MatrixStack(modelMatrix, viewMatrix, projectionMatrix);
-    this.texturedRenderer = new TexturedRenderer();
   }
 
   public void loop(final long gameWindowId) {
 
-    var last = System.currentTimeMillis();
-    var index = 0;
-
     while (!GLFW.glfwWindowShouldClose(gameWindowId)) {
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
 
-
-      final var now = System.currentTimeMillis();
-      if (now - last > 500L) {
-        last = now;
-        index++;
-      }
-
-      if (index > animationSteps.size() - 1) {
-        index = 0;
-      }
-
-      final var step = animationSteps.get(index);
-
-      texturedRenderer.draw(matrixStack, vaoId, textureId, step.startIndex(), step.count());
+      entity.draw(matrixStack);
 
       GLFW.glfwPollEvents();
       GLFW.glfwSwapBuffers(gameWindowId);

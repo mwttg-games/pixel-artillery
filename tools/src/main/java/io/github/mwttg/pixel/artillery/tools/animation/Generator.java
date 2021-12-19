@@ -1,5 +1,7 @@
 package io.github.mwttg.pixel.artillery.tools.animation;
 
+import io.github.mwttg.pixel.artillery.common.SpriteAnimationData;
+import io.github.mwttg.pixel.artillery.common.SpriteData;
 import io.github.mwttg.pixel.artillery.tools.common.TextureCoordinateGenerator;
 import io.github.mwttg.pixel.artillery.tools.common.TilesFactory;
 import java.util.ArrayList;
@@ -16,9 +18,10 @@ public class Generator {
   private final TextureCoordinateGenerator textureGenerator;
   private final float planeSize;
   private final int animationSteps;
+  private final int delay;
 
   /**
-   * Constructor.
+   * The Constructor.
    *
    * @param inputDefinition the parameters for creating an animation
    */
@@ -26,14 +29,15 @@ public class Generator {
     this.textureGenerator = new TextureCoordinateGenerator(inputDefinition.textureAtlas());
     this.planeSize = inputDefinition.planeSize();
     this.animationSteps = inputDefinition.animationSteps();
+    this.delay = inputDefinition.delayInMs();
   }
 
   /**
-   * Creates the {@link Animation}.
+   * Creates the {@link SpriteData}.
    *
-   * @return the {@link Animation}
+   * @return the {@link SpriteData}
    */
-  public Animation generate() {
+  public SpriteAnimationData generate() {
     List<Float> geometry = new ArrayList<>();
     List<Float> textureCoordinates = new ArrayList<>();
 
@@ -46,6 +50,9 @@ public class Generator {
           .collect(Collectors.toList());
     }
 
-    return new Animation(geometry.toArray(new Float[0]), textureCoordinates.toArray(new Float[0]));
+    final var spriteData = new SpriteData(SpriteData.toFloatArray(geometry),
+        SpriteData.toFloatArray(textureCoordinates));
+
+    return new SpriteAnimationData(spriteData, animationSteps, delay);
   }
 }

@@ -5,5 +5,6 @@ import io.github.mwttg.pixel.artillery.tools.common.TextureAtlas;
 /**
  * The input parameters for creating an animation.
  */
-public record InputDefinition(TextureAtlas textureAtlas, int animationSteps, float planeSize) {
+public record InputDefinition(TextureAtlas textureAtlas, int animationSteps, int delayInMs,
+                              float planeSize) {
 }

@@ -1,10 +1,10 @@
-package io.github.mwttg.pixel.artillery.framework.core.render;
+package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
 
 /**
  * Collection of Uniform locations (sorted alphabetically).
  */
-public interface Location {
+interface Location {
 
   String MODEL_MATRIX = "modelMatrix";
   String PROJECTION_MATRIX = "projectionMatrix";

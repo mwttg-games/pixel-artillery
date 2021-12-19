@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.framework.core;
+package io.github.mwttg.pixel.artillery.framework.graphics;
 
 import io.github.mwttg.pixel.artillery.framework.CleanUpUtilities;
 import org.lwjgl.BufferUtils;

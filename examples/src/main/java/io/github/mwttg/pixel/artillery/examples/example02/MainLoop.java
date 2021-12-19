@@ -1,31 +1,30 @@
 package io.github.mwttg.pixel.artillery.examples.example02;
 
-import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
-import io.github.mwttg.pixel.artillery.framework.core.render.textured.TexturedRenderer;
-import io.github.mwttg.pixel.artillery.framework.core.sprites.Sprite;
+import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
+import io.github.mwttg.pixel.artillery.framework.entity.Entity;
+import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL40;
 
 public class MainLoop {
-  private final MatrixStack matrixStack;
-  private final TexturedRenderer texturedRenderer;
 
-  private final Sprite sprite;
+  private final MatrixStack matrixStack;
+  private final Entity entity;
 
   public MainLoop(final Configuration configuration) {
     final var jsonFile = "files/example02/level.json";
     final var textureFile = "files/example02/texture-atlas.png";
-    this.sprite = Sprite.fromResources(jsonFile, textureFile);
+    final var drawable = new Sprite(jsonFile, textureFile);
+    this.entity = new Entity.EntityBuilder().addDrawable(drawable).build();
 
-    // MatrixStack & Renderer
+    // MatrixStack
     final var modelMatrix = new Matrix4f().translate(0, 0, 0);
     final var viewMatrix =
         (new Matrix4f()).setLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     final var projectionMatrix = createOrtho2DMatrix(configuration);
     this.matrixStack = new MatrixStack(modelMatrix, viewMatrix, projectionMatrix);
-    this.texturedRenderer = new TexturedRenderer();
   }
 
   public void loop(final long gameWindowId) {
@@ -33,7 +32,7 @@ public class MainLoop {
     while (!GLFW.glfwWindowShouldClose(gameWindowId)) {
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
 
-      texturedRenderer.draw(matrixStack, sprite);
+      entity.draw(matrixStack);
 
       GLFW.glfwPollEvents();
       GLFW.glfwSwapBuffers(gameWindowId);

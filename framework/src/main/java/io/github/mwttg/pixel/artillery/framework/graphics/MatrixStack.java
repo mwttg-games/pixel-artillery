@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.framework.core.render;
+package io.github.mwttg.pixel.artillery.framework.graphics;
 
 import org.joml.Matrix4f;
 

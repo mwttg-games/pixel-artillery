@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.framework.core;
+package io.github.mwttg.pixel.artillery.framework.graphics;
 
 import io.github.mwttg.pixel.artillery.common.SpriteData;
 import io.github.mwttg.pixel.artillery.framework.CleanUpUtilities;

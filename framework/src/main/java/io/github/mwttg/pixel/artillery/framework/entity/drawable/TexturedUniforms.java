@@ -1,14 +1,12 @@
-package io.github.mwttg.pixel.artillery.framework.core.render.textured;
+package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
-import io.github.mwttg.pixel.artillery.framework.core.render.Location;
-import io.github.mwttg.pixel.artillery.framework.core.render.MatrixStack;
-import io.github.mwttg.pixel.artillery.framework.core.render.Uniform;
+import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
 import java.util.Map;
 
 /**
  * Unit for uploading uniforms for the textured shader program.
  */
-public class TexturedUniforms implements Uniform {
+class TexturedUniforms implements Uniform {
 
   private final Map<String, Integer> locations;
 
