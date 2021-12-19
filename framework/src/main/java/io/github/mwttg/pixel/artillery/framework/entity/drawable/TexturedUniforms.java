@@ -1,7 +1,7 @@
 package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
-import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
 import java.util.Map;
+import org.joml.Matrix4f;
 
 /**
  * Unit for uploading uniforms for the textured shader program.
@@ -14,8 +14,11 @@ class TexturedUniforms implements Uniform {
     this.locations = initializeLocations(shaderProgramId);
   }
 
-  void upload(final MatrixStack matrixStack, final int textureId) {
-    uploadMatrixStack(locations, matrixStack);
+  void upload(final Matrix4f model, final Matrix4f view, final Matrix4f projection,
+              final int textureId) {
+    uploadModelMatrix(locations, model);
+    uploadViewMatrix(locations, view);
+    uploadProjectionMatrix(locations, projection);
     activateTexture0(locations, textureId);
   }
 

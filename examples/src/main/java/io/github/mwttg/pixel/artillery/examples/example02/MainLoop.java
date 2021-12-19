@@ -1,6 +1,5 @@
 package io.github.mwttg.pixel.artillery.examples.example02;
 
-import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
 import io.github.mwttg.pixel.artillery.framework.entity.Entity;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
@@ -10,21 +9,19 @@ import org.lwjgl.opengl.GL40;
 
 public class MainLoop {
 
-  private final MatrixStack matrixStack;
+  private final Matrix4f viewMatrix;
+  private final Matrix4f projectionMatrix;
   private final Entity entity;
 
   public MainLoop(final Configuration configuration) {
     final var jsonFile = "files/example02/level.json";
     final var textureFile = "files/example02/texture-atlas.png";
     final var drawable = new Sprite(jsonFile, textureFile);
-    this.entity = new Entity.EntityBuilder().addDrawable(drawable).build();
+    this.entity =
+        new Entity.EntityBuilder().addDrawable(drawable).addModelMatrix(new Matrix4f()).build();
 
-    // MatrixStack
-    final var modelMatrix = new Matrix4f().translate(0, 0, 0);
-    final var viewMatrix =
-        (new Matrix4f()).setLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-    final var projectionMatrix = createOrtho2DMatrix(configuration);
-    this.matrixStack = new MatrixStack(modelMatrix, viewMatrix, projectionMatrix);
+    this.viewMatrix = createViewMatrix();
+    this.projectionMatrix = createOrtho2DMatrix(configuration);
   }
 
   public void loop(final long gameWindowId) {
@@ -32,7 +29,7 @@ public class MainLoop {
     while (!GLFW.glfwWindowShouldClose(gameWindowId)) {
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
 
-      entity.draw(matrixStack);
+      entity.draw(viewMatrix, projectionMatrix);
 
       GLFW.glfwPollEvents();
       GLFW.glfwSwapBuffers(gameWindowId);
@@ -43,5 +40,9 @@ public class MainLoop {
     final var near = configuration.viewPortConfiguration().nearPlane();
     final var far = configuration.viewPortConfiguration().farPlane();
     return new Matrix4f().setOrtho(0.0f, 40.0f, 0.0f, 30.0f, near, far);
+  }
+
+  private Matrix4f createViewMatrix() {
+    return new Matrix4f().setLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
   }
 }

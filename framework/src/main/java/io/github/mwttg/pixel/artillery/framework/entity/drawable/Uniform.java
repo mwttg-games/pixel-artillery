@@ -1,6 +1,5 @@
 package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
-import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
 import java.nio.FloatBuffer;
 import java.util.Map;
 import org.joml.Matrix4f;
@@ -29,31 +28,36 @@ interface Uniform {
   }
 
   /**
-   * Uploads the model-, view- and projection-matrix.
+   * Uploads the model matrix.
    *
    * @param locations   the locations initialized in the implementation class
-   * @param matrixStack the matrix stack (see {@link MatrixStack}
+   * @param modelMatrix the model matrix
    */
-  default void uploadMatrixStack(final Map<String, Integer> locations,
-                                 final MatrixStack matrixStack) {
-    uploadModelMatrix(locations, matrixStack.modelMatrix());
-    uploadViewMatrix(locations, matrixStack.viewMatrix());
-    uploadProjectionMatrix(locations, matrixStack.projectionMatrix());
-  }
-
-  private void uploadModelMatrix(final Map<String, Integer> locations, final Matrix4f modelMatrix) {
+  default void uploadModelMatrix(final Map<String, Integer> locations, final Matrix4f modelMatrix) {
     final var location = locations.get(Location.MODEL_MATRIX);
     final var buffer = modelMatrix.get(MATRIX_BUFFER);
     GL40.glUniformMatrix4fv(location, false, buffer);
   }
 
-  private void uploadViewMatrix(final Map<String, Integer> locations, final Matrix4f viewMatrix) {
+  /**
+   * Uploads the view matrix (the camera).
+   *
+   * @param locations  the locations initialized in the implementation class
+   * @param viewMatrix the view matrix
+   */
+  default void uploadViewMatrix(final Map<String, Integer> locations, final Matrix4f viewMatrix) {
     final var location = locations.get(Location.VIEW_MATRIX);
     final var buffer = viewMatrix.get(MATRIX_BUFFER);
     GL40.glUniformMatrix4fv(location, false, buffer);
   }
 
-  private void uploadProjectionMatrix(final Map<String, Integer> locations,
+  /**
+   * Uploads the projection matrix.
+   *
+   * @param locations        the locations initialized in the implementation class
+   * @param projectionMatrix the projection matrix
+   */
+  default void uploadProjectionMatrix(final Map<String, Integer> locations,
                                       final Matrix4f projectionMatrix) {
     final var location = locations.get(Location.PROJECTION_MATRIX);
     final var buffer = projectionMatrix.get(MATRIX_BUFFER);

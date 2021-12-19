@@ -2,7 +2,7 @@ package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
 import io.github.mwttg.pixel.artillery.common.ReadFile;
 import io.github.mwttg.pixel.artillery.common.SpriteData;
-import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL40;
 
 /**
@@ -29,15 +29,17 @@ public class Sprite extends AbstractTexturedSprite implements Drawable {
   /**
    * This draws/renders the {@link Sprite} to the Screen.
    *
-   * @param matrixStack the {@link MatrixStack} including model-, view- and perspective matrix
+   * @param model      the model matrix
+   * @param view       the view matrix (camera)
+   * @param projection the projection matrix
    */
   @Override
-  public void draw(final MatrixStack matrixStack) {
+  public void draw(final Matrix4f model, final Matrix4f view, Matrix4f projection) {
     GL40.glBindVertexArray(getVertexArrayObjectId());
     GL40.glUseProgram(getShaderProgramId());
     enableVertexAttribArray();
 
-    getUniforms().upload(matrixStack, getTextureId());
+    getUniforms().upload(model, view, projection, getTextureId());
     GL40.glDrawArrays(GL40.GL_TRIANGLES, 0, getCompleteAmountOfPoints());
 
     disableVertexAttribArray();

@@ -1,16 +1,18 @@
 package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
-import io.github.mwttg.pixel.artillery.framework.graphics.MatrixStack;
+import org.joml.Matrix4f;
 
 /**
- * An Interface to 'mark' something drawable.
+ * An Interface to 'mark'/make something drawable.
  */
 public interface Drawable {
 
   /**
-   * Draws what/who ever implements this interface.
+   * Draws whatever/whoever implements this interface.
    *
-   * @param matrixStack the {@link MatrixStack} including model-, view- and perspective matrix
+   * @param model      the model matrix
+   * @param view       the view matrix (camera)
+   * @param projection the projection matrix
    */
-  void draw(final MatrixStack matrixStack);
+  void draw(final Matrix4f model, final Matrix4f view, final Matrix4f projection);
 }
