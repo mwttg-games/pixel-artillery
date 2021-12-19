@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.examples.example03;
+package io.github.mwttg.pixel.artillery.examples.example04;
 
 import io.github.mwttg.pixel.artillery.examples.ExampleConfiguration;
 import io.github.mwttg.pixel.artillery.framework.CleanUpUtilities;
@@ -6,9 +6,9 @@ import io.github.mwttg.pixel.artillery.framework.window.GameWindow;
 import java.io.IOException;
 
 /**
- * An example on how to create a simple Sprite animation.
+ * An example for the simplest player movement (left/right) without camera change.
  */
-public class Example03 {
+public class Example04 {
   public static void main(String[] args) throws IOException {
     final var configuration = ExampleConfiguration.create();
     final var gameWindowId = GameWindow.create(configuration);
