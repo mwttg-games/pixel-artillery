@@ -32,14 +32,14 @@ public final class TextureLoader {
     final var classLoader = ClassLoader.getSystemClassLoader();
     final var url = classLoader.getResource(filename);
     if (url == null) {
-      throw new IllegalArgumentException("Texture '%s' does not exist");
+      throw new IllegalArgumentException("Texture '%s' does not exist".formatted(filename));
     }
     final var file = new File(url.getFile()).getAbsolutePath();
     STBImage.stbi_set_flip_vertically_on_load(true);
     final var buffer = STBImage.stbi_load(file, widthBuffer, heightBuffer, colorBuffer, 4);
     if (buffer == null) {
       throw new RuntimeException(
-          "Image file '%s' not loaded: %S".formatted(filename, STBImage.stbi_failure_reason()));
+          "Image file '%s' not loaded: %s".formatted(filename, STBImage.stbi_failure_reason()));
     }
 
     final var width = widthBuffer.get();

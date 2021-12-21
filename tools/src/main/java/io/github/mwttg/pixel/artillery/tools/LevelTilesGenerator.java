@@ -19,8 +19,8 @@ public class LevelTilesGenerator {
     // final var directory = currentDirectory + "/integration-test-files/level";
     final var directory =
         "/Users/mwittig/development/private/pixel-artillery/examples/src/main/resources/files/"
-            + "example02/";
-    final var definitionFilename = "input-definition.json";
+            + "example04/";
+    final var definitionFilename = "level-definition.json";
     final var inputDefinition =
         ReadFile.jsonFrom(directory + definitionFilename, InputDefinition.class);
     final var blockFile = new File(directory + inputDefinition.levelBlocks().filename());

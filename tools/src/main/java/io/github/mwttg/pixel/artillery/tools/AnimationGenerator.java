@@ -13,13 +13,13 @@ public class AnimationGenerator {
   /**
    * This is the main function ;) .
    */
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
     // final var currentDirectory = System.getProperty("user.dir");
     // final var directory = currentDirectory + "/integration-test-files/animation/";
     final var directory =
         "/Users/mwittig/development/private/pixel-artillery/examples/src/main/resources/files/"
-            + "example03/";
-    final var definitionFilename = "input-definition.json";
+            + "example04/";
+    final var definitionFilename = "animation-definition.json";
     final var inputDefinition =
         ReadFile.jsonFrom(directory + definitionFilename, InputDefinition.class);
 

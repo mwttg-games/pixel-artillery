@@ -1,6 +1,7 @@
 package io.github.mwttg.pixel.artillery.examples.example04;
 
 import io.github.mwttg.pixel.artillery.framework.entity.Entity;
+import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.SpriteAnimation;
 import io.github.mwttg.pixel.artillery.framework.entity.movable.SideScrollerMovement;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
@@ -12,18 +13,28 @@ public class MainLoop {
 
   private final Matrix4f viewMatrix;
   private final Matrix4f projectionMatrix;
-  private final Entity entity;
+  private final Entity player;
+  private final Entity level;
 
   public MainLoop(final Configuration configuration) {
-    final var jsonFile = "files/example03/animation.json";
-    final var textureFile = "files/example03/animation.png";
-    final var drawable = new SpriteAnimation(jsonFile, textureFile);
-    final var modelMatrix = new Matrix4f().translate(10, 10, 0);
-    final var movable = new SideScrollerMovement();
-    this.entity = new Entity.EntityBuilder()
-        .addDrawable(drawable)
-        .addModelMatrix(modelMatrix)
-        .addMovable(movable)
+    final var playerJsonFile = "files/example04/player-idle.json";
+    final var playerTextureFile = "files/example04/player-idle.png";
+    final var playerDrawable = new SpriteAnimation(playerJsonFile, playerTextureFile);
+    final var playerModelMatrix = new Matrix4f().translate(10, 7, 0);
+    final var playerMovable = new SideScrollerMovement();
+    this.player = new Entity.EntityBuilder()
+        .addDrawable(playerDrawable)
+        .addModelMatrix(playerModelMatrix)
+        .addMovable(playerMovable)
+        .build();
+
+    final var levelJsonFile = "files/example04/level.json";
+    final var levelTextureFile = "files/example04/texture-atlas.png";
+    final var levelDrawable = new Sprite(levelJsonFile, levelTextureFile);
+    final var levelModelMatrix = new Matrix4f().translate(0, 0, -1);
+    this.level = new Entity.EntityBuilder()
+        .addDrawable(levelDrawable)
+        .addModelMatrix(levelModelMatrix)
         .build();
 
     this.viewMatrix = createViewMatrix();
@@ -35,8 +46,9 @@ public class MainLoop {
     while (!GLFW.glfwWindowShouldClose(gameWindowId)) {
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
 
-      entity.move(gameWindowId);
-      entity.draw(viewMatrix, projectionMatrix);
+      level.draw(viewMatrix, projectionMatrix);
+      player.move(gameWindowId);
+      player.draw(viewMatrix, projectionMatrix);
 
       GLFW.glfwPollEvents();
       GLFW.glfwSwapBuffers(gameWindowId);
