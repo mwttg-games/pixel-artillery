@@ -17,7 +17,7 @@ public class SpriteAnimation extends AbstractTexturedSprite implements Drawable 
   private long lastTick;
 
   /**
-   * The Constructor. (calls the Constructor of the abstract parent class).
+   * The Constructor (calls the Constructor of the abstract parent class).
    *
    * @param jsonFile    the .json file which contains data for the geometry (vertices) and texture
    *                    coordinates (and some data for the animation)
@@ -25,6 +25,19 @@ public class SpriteAnimation extends AbstractTexturedSprite implements Drawable 
    */
   public SpriteAnimation(final String jsonFile, final String textureFile) {
     super(jsonFile, textureFile);
+  }
+
+  /**
+   * The Constructor (calls the Constructor of the abstract parent class).
+   * This Constructor can be used to link the animation with a name ({@link String}).
+   *
+   * @param name        The name of the animation
+   * @param jsonFile    the .json file which contains data for the geometry (vertices) and texture
+   *                    coordinates (and some data for the animation)
+   * @param textureFile the .png file for the texture
+   */
+  public SpriteAnimation(final String name, final String jsonFile, final String textureFile) {
+    super(name, jsonFile, textureFile);
   }
 
   /**

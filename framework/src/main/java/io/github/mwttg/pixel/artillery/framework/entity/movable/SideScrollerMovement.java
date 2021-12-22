@@ -12,18 +12,18 @@ import org.lwjgl.glfw.GLFW;
 public class SideScrollerMovement implements Movable {
 
   @Override
-  public Matrix4f move(final long windowId, final Matrix4f model) {
+  public MoveTuple move(final long windowId, final Matrix4f model) {
     final var playerState = getPlayerState(windowId);
 
     if (playerState.contains(PlayerState.MOVE_LEFT)) {
-      return model.translate(-0.25f, 0f, 0f, model);
+      return new MoveTuple("left", model.translate(-0.05f, 0f, 0f, model));
     }
 
     if (playerState.contains(PlayerState.MOVE_RIGHT)) {
-      return model.translate(0.25f, 0f, 0f, model);
+      return new MoveTuple("right", model.translate(0.05f, 0f, 0f, model));
     }
 
-    return model;
+    return new MoveTuple("idle", model);
   }
 
 

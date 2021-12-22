@@ -13,7 +13,7 @@ public interface Movable {
    *
    * @param windowId the OpenGL game window id
    * @param model    the model matrix
-   * @return the new model matrix (after movement)
+   * @return the {@link MoveTuple} which contains the animation name and the model matrix
    */
-  Matrix4f move(final long windowId, final Matrix4f model);
+  MoveTuple move(final long windowId, final Matrix4f model);
 }

@@ -1,6 +1,7 @@
 package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
 import io.github.mwttg.pixel.artillery.common.SpriteData;
+import io.github.mwttg.pixel.artillery.framework.entity.Entity;
 import io.github.mwttg.pixel.artillery.framework.graphics.ShaderFactory;
 import io.github.mwttg.pixel.artillery.framework.graphics.TextureLoader;
 import io.github.mwttg.pixel.artillery.framework.graphics.VertexArrayObject;
@@ -12,6 +13,7 @@ import org.lwjgl.opengl.GL40;
  */
 abstract class AbstractTexturedSprite {
 
+  private final String name;
   private final int completeAmountOfPoints;
   private final int vertexArrayObjectId;
   private final int textureId;
@@ -26,6 +28,17 @@ abstract class AbstractTexturedSprite {
    * @param textureFile the .png file of the texture
    */
   AbstractTexturedSprite(final String jsonFile, final String textureFile) {
+    this.name = Entity.DEFAULT_DRAWABLE_NAME;
+    final var spriteData = extractSpriteData(jsonFile);
+    this.completeAmountOfPoints = spriteData.vertices().length / 3;
+    this.vertexArrayObjectId = VertexArrayObject.create(spriteData);
+    this.textureId = TextureLoader.createFromResource(textureFile);
+    this.shaderProgramId = ShaderFactory.createTextureShader();
+    this.uniforms = new TexturedUniforms(this.shaderProgramId);
+  }
+
+  AbstractTexturedSprite(final String name, final String jsonFile, final String textureFile) {
+    this.name = name;
     final var spriteData = extractSpriteData(jsonFile);
     this.completeAmountOfPoints = spriteData.vertices().length / 3;
     this.vertexArrayObjectId = VertexArrayObject.create(spriteData);
@@ -78,6 +91,10 @@ abstract class AbstractTexturedSprite {
     return uniforms;
   }
 
+  String getName() {
+    return name;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -87,11 +104,11 @@ abstract class AbstractTexturedSprite {
       return false;
     }
     return vertexArrayObjectId == that.vertexArrayObjectId && textureId == that.textureId
-        && shaderProgramId == that.shaderProgramId;
+        && shaderProgramId == that.shaderProgramId && Objects.equals(name, that.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(vertexArrayObjectId, textureId, shaderProgramId);
+    return Objects.hash(name, vertexArrayObjectId, textureId, shaderProgramId);
   }
 }

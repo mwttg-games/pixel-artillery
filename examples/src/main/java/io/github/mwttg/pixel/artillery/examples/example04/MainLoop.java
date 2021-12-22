@@ -17,13 +17,23 @@ public class MainLoop {
   private final Entity level;
 
   public MainLoop(final Configuration configuration) {
-    final var playerJsonFile = "files/example04/player-idle.json";
-    final var playerTextureFile = "files/example04/player-idle.png";
-    final var playerDrawable = new SpriteAnimation(playerJsonFile, playerTextureFile);
+    final var playerIdleJsonFile = "files/example04/player-idle.json";
+    final var playerIdleTextureFile = "files/example04/player-idle.png";
+    final var playerIdleDrawable = new SpriteAnimation(playerIdleJsonFile, playerIdleTextureFile);
+    final var playerLeftJsonFile = "files/example04/player-left.json";
+    final var playerLeftTextureFile = "files/example04/player-left.png";
+    final var playerLeftDrawable = new SpriteAnimation(playerLeftJsonFile, playerLeftTextureFile);
+    final var playerRightJsonFile = "files/example04/player-right.json";
+    final var playerRightTextureFile = "files/example04/player-right.png";
+    final var playerRightDrawable = new SpriteAnimation(playerRightJsonFile, playerRightTextureFile);
+
     final var playerModelMatrix = new Matrix4f().translate(10, 7, 0);
     final var playerMovable = new SideScrollerMovement();
     this.player = new Entity.EntityBuilder()
-        .addDrawable(playerDrawable)
+        .addDrawable("idle", playerIdleDrawable)
+        .addDrawable("left", playerLeftDrawable)
+        .addDrawable("right", playerRightDrawable)
+        .setDrawableName("idle")
         .addModelMatrix(playerModelMatrix)
         .addMovable(playerMovable)
         .build();
