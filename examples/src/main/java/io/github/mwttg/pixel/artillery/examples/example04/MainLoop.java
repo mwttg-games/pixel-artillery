@@ -3,7 +3,7 @@ package io.github.mwttg.pixel.artillery.examples.example04;
 import io.github.mwttg.pixel.artillery.framework.entity.Entity;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.SpriteAnimation;
-import io.github.mwttg.pixel.artillery.framework.entity.movable.SideScrollerMovement;
+import io.github.mwttg.pixel.artillery.framework.entity.movable.MoveTuple;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -25,17 +25,16 @@ public class MainLoop {
     final var playerLeftDrawable = new SpriteAnimation(playerLeftJsonFile, playerLeftTextureFile);
     final var playerRightJsonFile = "files/example04/player-right.json";
     final var playerRightTextureFile = "files/example04/player-right.png";
-    final var playerRightDrawable = new SpriteAnimation(playerRightJsonFile, playerRightTextureFile);
+    final var playerRightDrawable =
+        new SpriteAnimation(playerRightJsonFile, playerRightTextureFile);
 
     final var playerModelMatrix = new Matrix4f().translate(10, 7, 0);
-    final var playerMovable = new SideScrollerMovement();
     this.player = new Entity.EntityBuilder()
         .addDrawable("idle", playerIdleDrawable)
         .addDrawable("left", playerLeftDrawable)
         .addDrawable("right", playerRightDrawable)
         .setDrawableName("idle")
         .addModelMatrix(playerModelMatrix)
-        .addMovable(playerMovable)
         .build();
 
     final var levelJsonFile = "files/example04/level.json";
@@ -54,10 +53,15 @@ public class MainLoop {
   public void loop(final long gameWindowId) {
 
     while (!GLFW.glfwWindowShouldClose(gameWindowId)) {
+      // logic
+      final var playerMovement = playerMovement(gameWindowId, player.getModel());
+      player.setMovement(playerMovement);
+
+      // clear
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
 
+      // render
       level.draw(viewMatrix, projectionMatrix);
-      player.move(gameWindowId);
       player.draw(viewMatrix, projectionMatrix);
 
       GLFW.glfwPollEvents();
@@ -73,5 +77,17 @@ public class MainLoop {
 
   private Matrix4f createViewMatrix() {
     return new Matrix4f().setLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+  }
+
+  private MoveTuple playerMovement(final long gameWindowId, final Matrix4f playerModelMatrix) {
+    if (GLFW.glfwGetKey(gameWindowId, GLFW.GLFW_KEY_LEFT) == GLFW.GLFW_PRESS) {
+      viewMatrix.translate(0.08f, 0f, 0f, viewMatrix);
+      return new MoveTuple("left", playerModelMatrix.translate(-0.08f, 0f, 0f, playerModelMatrix));
+    } else if (GLFW.glfwGetKey(gameWindowId, GLFW.GLFW_KEY_RIGHT) == GLFW.GLFW_PRESS) {
+      viewMatrix.translate(-0.08f, 0f, 0f, viewMatrix);
+      return new MoveTuple("right", playerModelMatrix.translate(0.08f, 0f, 0f, playerModelMatrix));
+    } else {
+      return new MoveTuple("idle", playerModelMatrix);
+    }
   }
 }

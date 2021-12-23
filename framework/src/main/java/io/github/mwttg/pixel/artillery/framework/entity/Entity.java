@@ -3,7 +3,7 @@ package io.github.mwttg.pixel.artillery.framework.entity;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Drawable;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.SpriteAnimation;
-import io.github.mwttg.pixel.artillery.framework.entity.movable.Movable;
+import io.github.mwttg.pixel.artillery.framework.entity.movable.MoveTuple;
 import java.util.HashMap;
 import java.util.Map;
 import org.joml.Matrix4f;
@@ -19,7 +19,6 @@ public class Entity {
   public static final String DEFAULT_DRAWABLE_NAME = "default";
 
   private final Map<String, Drawable> drawableByName;
-  private final Movable movable;
 
   private Matrix4f model;
   private String drawableName;
@@ -28,7 +27,6 @@ public class Entity {
     this.drawableByName = builder.getDrawableByName();
     this.drawableName = builder.getDrawableName();
     this.model = builder.getModelMatrix();
-    this.movable = builder.getMovable();
   }
 
 
@@ -55,20 +53,18 @@ public class Entity {
   }
 
   /**
-   * Moves an entity on the screen, if it has a {@link Movable} component.
+   * Method to set the animation and position (with model matrix).
    *
-   * @param windowId the OpenGL windowId of the game window
+   * @param moveTuple the animation name and model matrix
    */
-  public void move(final long windowId) {
-    if (movable == null) {
-      LOG.error("This entity has no movement component.");
-      throw new RuntimeException(
-          "Method #move was called on an entity without movement component.");
-    }
+  public void setMovement(final MoveTuple moveTuple) {
+    this.model = moveTuple.model();
+    this.drawableName = moveTuple.name();
+  }
 
-    final var tuple = movable.move(windowId, model);
-    this.model = tuple.model();
-    this.drawableName = tuple.name();
+  // start of Getters
+  public Matrix4f getModel() {
+    return model;
   }
 
   /**
@@ -78,7 +74,6 @@ public class Entity {
     private final Map<String, Drawable> drawableByName = new HashMap<>();
     private String drawableName;
     private Matrix4f modelMatrix;
-    private Movable movable;
 
     /**
      * The Constructor.
@@ -135,17 +130,6 @@ public class Entity {
     }
 
     /**
-     * Adds a movement component to the entity.
-     *
-     * @param movable An implementation of a {@link Movable}.
-     * @return the {@link EntityBuilder}
-     */
-    public EntityBuilder addMovable(final Movable movable) {
-      this.movable = movable;
-      return this;
-    }
-
-    /**
      * Creates the entity.
      *
      * @return the {@link Entity}
@@ -165,10 +149,6 @@ public class Entity {
 
     private Matrix4f getModelMatrix() {
       return modelMatrix;
-    }
-
-    private Movable getMovable() {
-      return movable;
     }
   }
 }
