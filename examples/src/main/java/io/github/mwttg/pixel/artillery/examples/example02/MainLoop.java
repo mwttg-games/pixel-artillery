@@ -2,6 +2,7 @@ package io.github.mwttg.pixel.artillery.examples.example02;
 
 import io.github.mwttg.pixel.artillery.framework.entity.Entity;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
+import io.github.mwttg.pixel.artillery.framework.entity.position.Position;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -14,11 +15,12 @@ public class MainLoop {
   private final Entity entity;
 
   public MainLoop(final Configuration configuration) {
-    final var jsonFile = "files/example02/level.json";
-    final var textureFile = "files/example02/texture-atlas.png";
+    final var jsonFile = "files/level/level1/level.json";
+    final var textureFile = "files/level/texture-atlas.png";
     final var drawable = new Sprite(jsonFile, textureFile);
+    final var position = new Position(new Matrix4f(), 2.0f);
     this.entity =
-        new Entity.EntityBuilder().addDrawable(drawable).addModelMatrix(new Matrix4f()).build();
+        new Entity.EntityBuilder().addDrawable(drawable).addPosition(position).build();
 
     this.viewMatrix = createViewMatrix();
     this.projectionMatrix = createOrtho2DMatrix(configuration);

@@ -2,25 +2,29 @@ package io.github.mwttg.pixel.artillery.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.testng.annotations.Test;
 
 public class ReadFileTest {
 
+  private static final TypeReference<TestJson> TYPE = new TypeReference<>() {
+  };
+
   @Test
   public void testJsonFromResources_validFile() {
-    final var actual = ReadFile.jsonFromResources("files/valid-file.json", TestJson.class);
+    final var actual = ReadFile.jsonFromResources("files/valid-file.json", TYPE);
     final var expected = new TestJson("Hello World!", 42);
     assertThat(actual).isEqualTo(expected);
   }
 
   @Test(expectedExceptions = RuntimeException.class)
   public void testJsonFromResources_invalidFile() {
-    ReadFile.jsonFromResources("files/invalid-file.json", TestJson.class);
+    ReadFile.jsonFromResources("files/invalid-file.json", TYPE);
   }
 
   @Test(expectedExceptions = NullPointerException.class)
   public void testJsonFromResources_missingFile() {
-    ReadFile.jsonFromResources("files/missing.json", TestJson.class);
+    ReadFile.jsonFromResources("files/missing.json", TYPE);
   }
 
   @Test

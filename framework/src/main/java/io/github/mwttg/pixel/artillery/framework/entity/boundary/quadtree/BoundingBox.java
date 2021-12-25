@@ -1,5 +1,7 @@
 package io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree;
 
+import io.github.mwttg.pixel.artillery.common.Position;
+
 /**
  * A bounding box (a rectangle), defined by two points ({@link Position}s).
  */

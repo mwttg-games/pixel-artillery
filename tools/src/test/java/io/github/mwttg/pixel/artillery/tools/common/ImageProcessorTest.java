@@ -1,7 +1,8 @@
-package io.github.mwttg.pixel.artillery.tools.level;
+package io.github.mwttg.pixel.artillery.tools.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.github.mwttg.pixel.artillery.common.Dimension;
 import java.io.File;
 import java.io.IOException;
 import org.testng.annotations.BeforeMethod;

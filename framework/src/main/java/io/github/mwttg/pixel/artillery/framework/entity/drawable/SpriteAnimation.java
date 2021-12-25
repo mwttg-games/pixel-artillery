@@ -1,5 +1,6 @@
 package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.github.mwttg.pixel.artillery.common.ReadFile;
 import io.github.mwttg.pixel.artillery.common.SpriteAnimationData;
 import io.github.mwttg.pixel.artillery.common.SpriteData;
@@ -52,7 +53,9 @@ public class SpriteAnimation extends AbstractTexturedSprite implements Drawable 
    */
   @Override
   SpriteData extractSpriteData(String jsonFile) {
-    final var spriteAnimationData = ReadFile.jsonFromResources(jsonFile, SpriteAnimationData.class);
+    final var type = new TypeReference<SpriteAnimationData>() {
+    };
+    final var spriteAnimationData = ReadFile.jsonFromResources(jsonFile, type);
     this.delay = spriteAnimationData.delayInMs();
     this.maxAnimationSteps = spriteAnimationData.animationSteps();
     this.currentAnimationStep = 0;

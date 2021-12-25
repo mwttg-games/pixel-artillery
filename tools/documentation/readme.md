@@ -8,7 +8,8 @@ Here you can find some documentation about the tools for Pixel Art(illery)
 
 ---
 
-[<< Back][main] 
+[<< Back][main]
 
 [level-data-generator]: level-data-generator/level-data-generator.md
+
 [main]: ../../readme.md

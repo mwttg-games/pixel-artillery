@@ -1,8 +1,8 @@
 # Pixel Art(illery) - Tools - Generator for Level Data
 
-This is a little tool for generating level data (for OpenGL) with a draw application.
-It needs two input files to generate the output. 
-The output is a json file which can be used (in combination with the texture atlas) to render a level.
+This is a little tool for generating level data (for OpenGL) with a draw application. It needs two
+input files to generate the output. The output is a json file which can be used (in combination with
+the texture atlas) to render a level.
 
 ## Overview
 
@@ -11,13 +11,14 @@ The output is a json file which can be used (in combination with the texture atl
 
 ## in Detail
 
-The idea is to create a level in a draw application as a `.png` image by using colored blocks.
-This could look something like this:
+The idea is to create a level in a draw application as a `.png` image by using colored blocks. This
+could look something like this:
 
 | ![the Level as blocks][blocks] |
 | ------------------------------ |
 
-In the end result, the Level should use textures. Therefore, a `Texture Atlas` is needed, which could look like this:
+In the end result, the Level should use textures. Therefore, a `Texture Atlas` is needed, which
+could look like this:
 
 | ![a Texture Atlas][texture-atlas] |
 | --------------------------------- |
@@ -27,14 +28,15 @@ The indexing of the tiles inside the `Texture Atlas` is defined by the `Level Ge
 | ![the Texture Atlas with index][texture-atlas-index] |
 | ---------------------------------------------------- |
 
-There is also a mapping needed from the used color of the blocks to the texture which should be rendered in the end.
-Something like this:
+There is also a mapping needed from the used color of the blocks to the texture which should be
+rendered in the end. Something like this:
 
 | ![the mapping of the colored blocks][map] |
 | ----------------------------------------- |
 
-For the color mapping and some other information a input `.json` file is needed.
-This could look like:
+For the color mapping and some other information a input `.json` file is needed. This could look
+like:
+
 ```json
 {
   "textureAtlas": {
@@ -74,7 +76,8 @@ This could look like:
 }
 ```
 
-The `Level Generator` will take this input file and the `level block` image file and creates a `.json`  output file.
+The `Level Generator` will take this input file and the `level block` image file and creates
+a `.json`  output file.
 
 ```json
 {
@@ -83,13 +86,16 @@ The `Level Generator` will take this input file and the `level block` image file
 }
 ```
 
-The `tilesGeometry` float array you can use for creating an OpenGL Vertex Buffer Object for the vertices (the mesh).
+The `tilesGeometry` float array you can use for creating an OpenGL Vertex Buffer Object for the
+vertices (the mesh).
 
 | ![the geometry data][mesh] |
 | -------------------------- |
 
-The `textureCoordinates` float array you can use for creating an OpenGL Vertex Buffer Object for the uv- coordinates of the texture.
-After that you can create am OpenGL Vertex Array Object (with both Vertex Buffer Objects), load the `Texture Atlas` as a texture and the result should render the textured level mesh in one draw call.
+The `textureCoordinates` float array you can use for creating an OpenGL Vertex Buffer Object for the
+uv- coordinates of the texture. After that you can create am OpenGL Vertex Array Object (with both
+Vertex Buffer Objects), load the `Texture Atlas` as a texture and the result should render the
+textured level mesh in one draw call.
 
 | ![the rendered Level][result] |
 | ----------------------------- |
@@ -99,10 +105,17 @@ After that you can create am OpenGL Vertex Array Object (with both Vertex Buffer
 [<< Back][tools]
 
 [blocks]: level-blocks.png
+
 [map]: map-hint.png
+
 [mesh]: mesh.png
+
 [overview]: Overview.svg
+
 [result]: result.png
+
 [texture-atlas]: texture-atlas.png
+
 [texture-atlas-index]: texture-atlas-index.png
+
 [tools]: ../readme.md

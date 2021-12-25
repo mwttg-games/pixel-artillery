@@ -1,9 +1,11 @@
-package io.github.mwttg.pixel.artillery.examples.example04;
+package io.github.mwttg.pixel.artillery.examples.example05;
 
 import io.github.mwttg.pixel.artillery.framework.entity.Entity;
+import io.github.mwttg.pixel.artillery.framework.entity.boundary.grid.Grid;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.SpriteAnimation;
 import io.github.mwttg.pixel.artillery.framework.entity.position.Position;
+import io.github.mwttg.pixel.artillery.framework.entity.velocity.Velocity;
 import io.github.mwttg.pixel.artillery.framework.window.Configuration;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -15,6 +17,9 @@ public class MainLoop {
   private final Matrix4f projectionMatrix;
   private final Entity player;
   private final Entity level;
+  private final Grid levelBoundary;
+
+  private final PlayerMovementSystem playerMovementSystem;
 
   public MainLoop(final Configuration configuration) {
     final var playerIdleJsonFile = "files/player/blob/player-idle.json";
@@ -27,17 +32,20 @@ public class MainLoop {
     final var playerRightTextureFile = "files/player/blob/player-right.png";
     final var playerRightDrawable =
         new SpriteAnimation(playerRightJsonFile, playerRightTextureFile);
-    final var playerModelMatrix = new Matrix4f().translate(10, 7, 0);
-    final var playerPosition = new Position(playerModelMatrix, 2.0f);
+    final var playerModelMatrix = new Matrix4f().translate(5, 5, 0);
+    final var playerPosition = new Position(playerModelMatrix, 1.0f);
+    final var playerVelocity = new Velocity(0.0f, 0.0f);
     this.player = new Entity.EntityBuilder()
         .addDrawable("idle", playerIdleDrawable)
         .addDrawable("left", playerLeftDrawable)
         .addDrawable("right", playerRightDrawable)
         .setDrawableName("idle")
         .addPosition(playerPosition)
+        .addVelocity(playerVelocity)
+        .setGravity(9.81f)
         .build();
 
-    final var levelJsonFile = "files/level/level2/level.json";
+    final var levelJsonFile = "files/level/level3/level.json";
     final var levelTextureFile = "files/level/texture-atlas.png";
     final var levelDrawable = new Sprite(levelJsonFile, levelTextureFile);
     final var levelModelMatrix = new Matrix4f().translate(0, 0, -1);
@@ -47,15 +55,25 @@ public class MainLoop {
         .addPosition(levelPosition)
         .build();
 
+    final var levelBoundaryJsonFile = "files/level/level3/level-boundary.json";
+    this.levelBoundary = new Grid(levelBoundaryJsonFile);
+
     this.viewMatrix = createViewMatrix();
     this.projectionMatrix = createOrtho2DMatrix(configuration);
+
+    this.playerMovementSystem = new PlayerMovementSystem();
   }
 
   public void loop(final long gameWindowId) {
-
+    var last = System.currentTimeMillis();
     while (!GLFW.glfwWindowShouldClose(gameWindowId)) {
+      // clock
+      var current = System.currentTimeMillis();
+      final var deltaT = (current - last) / 1000.0f;
+      last = current;
+
       // logic
-      playerMovement(gameWindowId);
+      playerMovementSystem.execute(gameWindowId, deltaT, player, levelBoundary);
 
       // clear
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
@@ -77,23 +95,5 @@ public class MainLoop {
 
   private Matrix4f createViewMatrix() {
     return new Matrix4f().setLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-  }
-
-  // method manipulates player entity (mutable)
-  private void playerMovement(final long gameWindowId) {
-    if (GLFW.glfwGetKey(gameWindowId, GLFW.GLFW_KEY_LEFT) == GLFW.GLFW_PRESS) {
-      viewMatrix.translate(0.08f, 0f, 0f, viewMatrix);
-      player.setDrawableName("left");
-      player.getPosition().translate(-0.08f, 0f, 0f);
-      // return new MoveTuple("left", playerModelMatrix.translate(-0.08f, 0f, 0f, playerModelMatrix));
-    } else if (GLFW.glfwGetKey(gameWindowId, GLFW.GLFW_KEY_RIGHT) == GLFW.GLFW_PRESS) {
-      viewMatrix.translate(-0.08f, 0f, 0f, viewMatrix);
-      player.setDrawableName("right");
-      player.getPosition().translate(0.08f, 0f, 0f);
-      // return new MoveTuple("right", playerModelMatrix.translate(0.08f, 0f, 0f, playerModelMatrix));
-    } else {
-      player.setDrawableName("idle");
-      // return new MoveTuple("idle", playerModelMatrix);
-    }
   }
 }

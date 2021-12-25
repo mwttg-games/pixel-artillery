@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.tools.level;
+package io.github.mwttg.pixel.artillery.tools.common;
 
 /**
  * This is one part of the input of the LevelGenerator (output .json file).

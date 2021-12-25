@@ -1,6 +1,7 @@
 package io.github.mwttg.pixel.artillery.tools.level;
 
 import io.github.mwttg.pixel.artillery.tools.LevelTilesGenerator;
+import io.github.mwttg.pixel.artillery.tools.common.LevelBlocks;
 import io.github.mwttg.pixel.artillery.tools.common.TextureAtlas;
 import java.util.Map;
 

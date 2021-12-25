@@ -1,5 +1,6 @@
 package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.github.mwttg.pixel.artillery.common.ReadFile;
 import io.github.mwttg.pixel.artillery.common.SpriteData;
 import org.joml.Matrix4f;
@@ -23,7 +24,9 @@ public class Sprite extends AbstractTexturedSprite implements Drawable {
 
   @Override
   SpriteData extractSpriteData(final String jsonFile) {
-    return ReadFile.jsonFromResources(jsonFile, SpriteData.class);
+    final var type = new TypeReference<SpriteData>() {
+    };
+    return ReadFile.jsonFromResources(jsonFile, type);
   }
 
   /**

@@ -1,0 +1,9 @@
+{
+  "levelBlocks": {
+    "blockSize": 10,
+    "filename": "level-blocks.png"
+  },
+  "nonSolidColors": [
+    "000000"
+  ]
+}

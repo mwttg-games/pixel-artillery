@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree;
+package io.github.mwttg.pixel.artillery.common;
 
 /**
  * A position, a 2D coordinate.

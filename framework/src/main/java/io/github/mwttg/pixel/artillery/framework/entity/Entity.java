@@ -3,7 +3,8 @@ package io.github.mwttg.pixel.artillery.framework.entity;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Drawable;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.Sprite;
 import io.github.mwttg.pixel.artillery.framework.entity.drawable.SpriteAnimation;
-import io.github.mwttg.pixel.artillery.framework.entity.movable.MoveTuple;
+import io.github.mwttg.pixel.artillery.framework.entity.position.Position;
+import io.github.mwttg.pixel.artillery.framework.entity.velocity.Velocity;
 import java.util.HashMap;
 import java.util.Map;
 import org.joml.Matrix4f;
@@ -20,13 +21,17 @@ public class Entity {
 
   private final Map<String, Drawable> drawableByName;
 
-  private Matrix4f model;
+  private Position position;
   private String drawableName;
+  private Velocity velocity;
+  private float gravity;
 
   private Entity(final EntityBuilder builder) {
     this.drawableByName = builder.getDrawableByName();
     this.drawableName = builder.getDrawableName();
-    this.model = builder.getModelMatrix();
+    this.position = builder.getPosition();
+    this.velocity = builder.getVelocity();
+    this.gravity = builder.getGravity();
   }
 
 
@@ -43,28 +48,31 @@ public class Entity {
           "Method #draw was called on an entity without Drawable component.");
     }
 
-    if (model == null) {
+    if (position == null) {
       LOG.error("This entity has no model matrix!");
       throw new RuntimeException("Method #draw was called on an entity without model matrix.");
     }
 
     final var currentDrawable = drawableByName.get(drawableName);
+    final var model = position.getModelMatrix();
     currentDrawable.draw(model, view, projection);
   }
 
-  /**
-   * Method to set the animation and position (with model matrix).
-   *
-   * @param moveTuple the animation name and model matrix
-   */
-  public void setMovement(final MoveTuple moveTuple) {
-    this.model = moveTuple.model();
-    this.drawableName = moveTuple.name();
+  public void setDrawableName(String drawableName) {
+    this.drawableName = drawableName;
   }
 
   // start of Getters
-  public Matrix4f getModel() {
-    return model;
+  public Position getPosition() {
+    return position;
+  }
+
+  public Velocity getVelocity() {
+    return velocity;
+  }
+
+  public float getGravity() {
+    return gravity;
   }
 
   /**
@@ -73,7 +81,9 @@ public class Entity {
   public static class EntityBuilder {
     private final Map<String, Drawable> drawableByName = new HashMap<>();
     private String drawableName;
-    private Matrix4f modelMatrix;
+    private Position position;
+    private Velocity velocity;
+    private float gravity;
 
     /**
      * The Constructor.
@@ -118,14 +128,18 @@ public class Entity {
       return this;
     }
 
-    /**
-     * Adds a model matrix to the {@link Entity}.
-     *
-     * @param modelMatrix the model matrix
-     * @return the {@link EntityBuilder}
-     */
-    public EntityBuilder addModelMatrix(final Matrix4f modelMatrix) {
-      this.modelMatrix = modelMatrix;
+    public EntityBuilder addPosition(final Position position) {
+      this.position = position;
+      return this;
+    }
+
+    public EntityBuilder addVelocity(final Velocity velocity) {
+      this.velocity = velocity;
+      return this;
+    }
+
+    public EntityBuilder setGravity(final float gravity) {
+      this.gravity = gravity;
       return this;
     }
 
@@ -147,8 +161,16 @@ public class Entity {
       return drawableName;
     }
 
-    private Matrix4f getModelMatrix() {
-      return modelMatrix;
+    private Position getPosition() {
+      return position;
+    }
+
+    private Velocity getVelocity() {
+      return velocity;
+    }
+
+    public float getGravity() {
+      return gravity;
     }
   }
 }

@@ -2,6 +2,7 @@ package io.github.mwttg.pixel.artillery.tools.level;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import io.github.mwttg.pixel.artillery.tools.common.LevelBlocks;
 import io.github.mwttg.pixel.artillery.tools.common.TextureAtlas;
 import java.io.File;
 import java.io.IOException;

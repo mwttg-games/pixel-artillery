@@ -1,6 +1,8 @@
 package io.github.mwttg.pixel.artillery.tools.level;
 
+import io.github.mwttg.pixel.artillery.common.Dimension;
 import io.github.mwttg.pixel.artillery.common.SpriteData;
+import io.github.mwttg.pixel.artillery.tools.common.ImageProcessor;
 import io.github.mwttg.pixel.artillery.tools.common.TextureCoordinateGenerator;
 import java.io.File;
 import java.io.IOException;
