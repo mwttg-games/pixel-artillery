@@ -72,22 +72,22 @@ public class QuadTree {
   }
 
   private boolean goesNorthEast(final Node current, final BoundingBox boundingBox) {
-    return boundingBox.getCenter().x() > current.getBoundingBox().getCenter().x()
-        && boundingBox.getCenter().y() > current.getBoundingBox().getCenter().y();
+    return boundingBox.getCenter().getX() > current.getBoundingBox().getCenter().getX()
+        && boundingBox.getCenter().getY() > current.getBoundingBox().getCenter().getY();
   }
 
   private boolean goesNorthWest(final Node current, final BoundingBox boundingBox) {
-    return boundingBox.getCenter().x() <= current.getBoundingBox().getCenter().x()
-        && boundingBox.getCenter().y() > current.getBoundingBox().getCenter().y();
+    return boundingBox.getCenter().getX() <= current.getBoundingBox().getCenter().getX()
+        && boundingBox.getCenter().getY() > current.getBoundingBox().getCenter().getY();
   }
 
   private boolean goesSouthEast(final Node current, final BoundingBox boundingBox) {
-    return boundingBox.getCenter().x() > current.getBoundingBox().getCenter().x()
-        && boundingBox.getCenter().y() <= current.getBoundingBox().getCenter().y();
+    return boundingBox.getCenter().getX() > current.getBoundingBox().getCenter().getX()
+        && boundingBox.getCenter().getY() <= current.getBoundingBox().getCenter().getY();
   }
 
   private boolean goesSouthWest(final Node current, final BoundingBox boundingBox) {
-    return boundingBox.getCenter().x() <= current.getBoundingBox().getCenter().x()
-        && boundingBox.getCenter().y() <= current.getBoundingBox().getCenter().y();
+    return boundingBox.getCenter().getX() <= current.getBoundingBox().getCenter().getX()
+        && boundingBox.getCenter().getY() <= current.getBoundingBox().getCenter().getY();
   }
 }

@@ -32,7 +32,7 @@ public class MainLoop {
     final var playerRightTextureFile = "files/player/blob/player-right.png";
     final var playerRightDrawable =
         new SpriteAnimation(playerRightJsonFile, playerRightTextureFile);
-    final var playerModelMatrix = new Matrix4f().translate(5, 5, 0);
+    final var playerModelMatrix = new Matrix4f().translate(3, 6, 0);
     final var playerPosition = new Position(playerModelMatrix, 1.0f);
     final var playerVelocity = new Velocity(0.0f, 0.0f);
     this.player = new Entity.EntityBuilder()

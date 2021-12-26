@@ -1,8 +1,11 @@
 package io.github.mwttg.pixel.artillery.framework.entity.boundary.grid;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.github.mwttg.pixel.artillery.common.Point;
 import io.github.mwttg.pixel.artillery.common.ReadFile;
+import io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree.BoundingBox;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A component for an entity. Can be used to have a model for walkable and solid areas of a level.

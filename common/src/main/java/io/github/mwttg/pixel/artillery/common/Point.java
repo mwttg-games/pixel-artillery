@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.framework.entity.position;
+package io.github.mwttg.pixel.artillery.common;
 
 import java.util.Objects;
 import java.util.StringJoiner;

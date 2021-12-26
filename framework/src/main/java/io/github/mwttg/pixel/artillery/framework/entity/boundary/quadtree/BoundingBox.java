@@ -1,21 +1,21 @@
 package io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree;
 
-import io.github.mwttg.pixel.artillery.common.Position;
+import io.github.mwttg.pixel.artillery.common.Point;
 
 /**
- * A bounding box (a rectangle), defined by two points ({@link Position}s).
+ * A bounding box (a rectangle), defined by two points ({@link Point}s).
  */
-public record BoundingBox(Position bottomLeft, Position topRight) {
+public record BoundingBox(Point bottomLeft, Point topRight) {
 
   /**
    * Calculates the center of the {@link BoundingBox}.
    *
-   * @return the 2D Coordinate {@link Position} of the center
+   * @return the 2D Coordinate {@link Point} of the center
    */
-  public Position getCenter() {
-    final var x = bottomLeft.x() + ((topRight.y() - bottomLeft.x()) / 2.0f);
-    final var y = bottomLeft.y() + ((topRight.y() - bottomLeft.y()) / 2.0f);
-    return new Position(x, y);
+  public Point getCenter() {
+    final var x = bottomLeft.getX() + ((topRight.getY() - bottomLeft.getX()) / 2.0f);
+    final var y = bottomLeft.getY() + ((topRight.getY() - bottomLeft.getY()) / 2.0f);
+    return new Point(x, y);
   }
 
 
@@ -27,9 +27,10 @@ public record BoundingBox(Position bottomLeft, Position topRight) {
    */
   @SuppressWarnings("RedundantIfStatement") // for better human readability
   public boolean intersect(final BoundingBox other) {
-    if (bottomLeft.x() > other.topRight().x() || topRight.x() < other.bottomLeft.x()) {
+    if (bottomLeft.getX() > other.topRight().getX() || topRight.getX() < other.bottomLeft.getX()) {
       return false;
-    } else if (bottomLeft.y() > other.topRight.y() || topRight.y() < other.bottomLeft().y()) {
+    } else if (bottomLeft.getY() > other.topRight.getY() ||
+        topRight.getY() < other.bottomLeft().getY()) {
       return false;
     } else {
       return true;
