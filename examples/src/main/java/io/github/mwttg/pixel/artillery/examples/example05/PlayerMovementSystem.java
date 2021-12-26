@@ -2,6 +2,7 @@ package io.github.mwttg.pixel.artillery.examples.example05;
 
 import io.github.mwttg.pixel.artillery.framework.entity.Entity;
 import io.github.mwttg.pixel.artillery.framework.entity.boundary.grid.Grid;
+import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
 public class PlayerMovementSystem {
@@ -10,9 +11,9 @@ public class PlayerMovementSystem {
   private boolean[] blocked = {false, false, false, false};
 
   public void execute(final long gameWindowId, final float deltaT, Entity player,
-                      final Grid level) {
+                      final Grid level, Matrix4f camera) { // camera is mutable
     processKeys(gameWindowId, player);
-    nextTick(deltaT, player, level);
+    nextTick(deltaT, player, level, camera);
   }
 
   /**
@@ -70,7 +71,7 @@ public class PlayerMovementSystem {
         (int) (boundingBox.bottomLeft().getY() + deltaY));
   }
 
-  public void nextTick(final float deltaT, Entity player, final Grid level) {
+  public void nextTick(final float deltaT, Entity player, final Grid level, Matrix4f camera) {
     var deltaX = player.getVelocity().getHorizontal() * deltaT;
 
     float deltaY;
@@ -103,5 +104,6 @@ public class PlayerMovementSystem {
     }
 
     player.getPosition().translate(deltaX, deltaY, 0.0f);
+    camera.translate(-deltaX, -deltaY, 0.0f);
   }
 }

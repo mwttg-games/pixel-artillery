@@ -73,7 +73,7 @@ public class MainLoop {
       last = current;
 
       // logic
-      playerMovementSystem.execute(gameWindowId, deltaT, player, levelBoundary);
+      playerMovementSystem.execute(gameWindowId, deltaT, player, levelBoundary, viewMatrix);
 
       // clear
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
