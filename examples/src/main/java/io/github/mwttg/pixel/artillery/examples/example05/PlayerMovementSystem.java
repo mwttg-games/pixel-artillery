@@ -37,39 +37,17 @@ public class PlayerMovementSystem {
     }
   }
 
-  private void checkCollision2(Entity player, final Grid level, final float deltaX,
-                               final float deltaY) {
-    final var boundingBox = player.getPosition().getBoundingBox();
-
-    // check left
-    blocked[0] = level.isSolid(
-        (int) (boundingBox.bottomLeft().getX() + deltaX),
-        (int) (boundingBox.bottomLeft().getY() + 0.05f + deltaY))
-        || level.isSolid(
-        (int) (boundingBox.bottomLeft().getX() + deltaX),
-        (int) (boundingBox.topRight().getY() + deltaY));
-    // check right
-    blocked[1] = level.isSolid(
-        (int) (boundingBox.topRight().getX() + deltaX),
-        (int) (boundingBox.topRight().getY() + deltaY))
-        || level.isSolid(
-        (int) (boundingBox.topRight().getX() + deltaX),
-        (int) (boundingBox.bottomLeft().getY() + 0.05 + deltaY));
-    // check top
-    blocked[2] = level.isSolid(
-        (int) (boundingBox.bottomLeft().getX() + deltaX),
-        (int) (boundingBox.topRight().getY() + deltaY))
-        || level.isSolid(
-        (int) (boundingBox.topRight().getX() + deltaX),
-        (int) (boundingBox.topRight().getY() + deltaY));
-    // check bottom
-    blocked[3] = level.isSolid(
-        (int) (boundingBox.bottomLeft().getX() + deltaX),
-        (int) (boundingBox.bottomLeft().getY() + deltaY))
-        || level.isSolid(
-        (int) (boundingBox.topRight().getX() + deltaX),
-        (int) (boundingBox.bottomLeft().getY() + deltaY));
+  private void checkCollision(Entity player, final Grid level) {
+    final var currentCenter = player.getPosition().getBoundingBox().getCenter();
+    final var currentBoundingBox = player.getPosition().getBoundingBox();
+    final var blockedDirections = level.checkCollision(currentCenter, currentBoundingBox);
+    blocked[0] = blockedDirections.left();
+    blocked[1] = blockedDirections.right();
+    blocked[2] = blockedDirections.top();
+    blocked[3] = blockedDirections.bottom();
   }
+
+
 
   public void nextTick(final float deltaT, Entity player, final Grid level, Matrix4f camera) {
     var deltaX = player.getVelocity().getHorizontal() * deltaT;
@@ -85,25 +63,65 @@ public class PlayerMovementSystem {
       deltaY = 0.0f;
     }
 
-    checkCollision2(player, level, deltaX, deltaY);
+    checkCollision(player, level);
 
-    // left & right
-    if (blocked[0] || blocked[1]) {
-      deltaX = 0.0f;
+    // left
+    if (blocked[0]) {
+      deltaX = snapLeft(player);
       player.getVelocity().setHorizontal(0.0f);
     }
-    // top & bottom
+
+    // right
+    if (blocked[1]) {
+      deltaX = snapRight(player);
+      player.getVelocity().setHorizontal(0.0f);
+    }
+
+    // top
     if (blocked[2]) {
-      deltaY = 0.0f;
+      deltaY = snapTop(player);
       player.getVelocity().setVertical(0.0f);
     }
 
+    // bottom
     if (blocked[3]) {
-      deltaY = 0.0f;
+      deltaY = snapBottom(player);
       player.getVelocity().setVertical(0.0f);
     }
 
     player.getPosition().translate(deltaX, deltaY, 0.0f);
     camera.translate(-deltaX, -deltaY, 0.0f);
+  }
+
+  private float snapBottom(Entity player) {
+    final var y = player.getPosition().getBoundingBox().getBottomLeft().getY();
+    final var iPart = (int) y;
+    final var fPart = (iPart + 1.0f) - y;
+
+    if (fPart < 0.001f) {
+      return 0.0f;
+    }
+    return fPart;
+  }
+
+  private float snapLeft(Entity player) {
+    final var x = player.getPosition().getBoundingBox().getBottomLeft().getX();
+    final var iPart = (int) x;
+
+    return (iPart + 1.0f) - x;
+  }
+
+  private float snapRight(Entity player) {
+    final var x = player.getPosition().getBoundingBox().getTopRight().getX();
+    final var iPart = (int) x;
+
+    return (iPart) - x;
+  }
+
+  private float snapTop(Entity player) {
+    final var y = player.getPosition().getBoundingBox().getTopRight().getY();
+    final var iPart = (int) y;
+
+    return (iPart) - y;
   }
 }

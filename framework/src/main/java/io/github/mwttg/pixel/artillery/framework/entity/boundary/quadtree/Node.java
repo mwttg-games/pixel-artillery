@@ -1,5 +1,7 @@
 package io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree;
 
+import io.github.mwttg.pixel.artillery.common.BoundingBox;
+
 /**
  * Represents a node inside the {@link QuadTree}.
  */

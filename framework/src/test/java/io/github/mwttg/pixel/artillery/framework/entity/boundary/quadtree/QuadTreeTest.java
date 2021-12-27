@@ -2,6 +2,7 @@ package io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.github.mwttg.pixel.artillery.common.BoundingBox;
 import io.github.mwttg.pixel.artillery.common.Point;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

@@ -13,6 +13,10 @@ public class Point {
   private float y;
   //CHECKSTYLE:ON
 
+  // for jackson
+  public Point() {
+  }
+
   public Point(final float x, final float y) {
     this.x = x;
     this.y = y;

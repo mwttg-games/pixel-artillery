@@ -2,6 +2,7 @@ package io.github.mwttg.pixel.artillery.common;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -35,6 +36,8 @@ public final class ReadFile {
         Objects.requireNonNull(ReadFile.class.getClassLoader().getResource(filename),
             "Something went wrong during opening file '%s'.".formatted(filename)).getFile());
     final var objectMapper = new ObjectMapper();
+    objectMapper.registerModule(new Jdk8Module());
+
     try {
       return objectMapper.readValue(file, typeRef);
     } catch (final IOException exception) {
@@ -58,6 +61,7 @@ public final class ReadFile {
   public static <T> T jsonFrom(final String filename, final Class<T> clazz) {
     final var file = new File(filename);
     final var objectMapper = new ObjectMapper();
+    objectMapper.registerModule(new Jdk8Module());
 
     try {
       return objectMapper.readValue(file, clazz);

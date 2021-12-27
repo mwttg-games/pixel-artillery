@@ -1,5 +1,7 @@
 package io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree;
 
+import io.github.mwttg.pixel.artillery.common.BoundingBox;
+
 /**
  * First Prototype of a Quadtree, used for checking where the player can walk.
  * ToDo: Tests missing

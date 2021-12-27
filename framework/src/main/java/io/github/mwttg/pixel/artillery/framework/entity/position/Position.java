@@ -1,19 +1,17 @@
 package io.github.mwttg.pixel.artillery.framework.entity.position;
 
-import io.github.mwttg.pixel.artillery.common.Point;
-import io.github.mwttg.pixel.artillery.framework.entity.boundary.quadtree.BoundingBox;
+import io.github.mwttg.pixel.artillery.common.BoundingBox;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 /**
  * A component for an entity to set a position in the game window.
+ * ToDo Think about splitting Position and Bounding Box.
  */
 public class Position {
 
-  private final float planeSize;
-  private Matrix4f model;
-  private Vector3f vector = new Vector3f(); // mutable Vector for calculations, like alloc memory...
-  private BoundingBox boundingBox;
+  private Matrix4f model; // mutable
+  private BoundingBox boundingBox; // mutable
 
   /**
    * The Constructor.
@@ -23,13 +21,15 @@ public class Position {
    */
   public Position(final Matrix4f modelMatrix, final float planeSize) {
     this.model = modelMatrix;
-    this.planeSize = planeSize;
-    calculateBoundingBox();
+
+    Vector3f vector = new Vector3f();
+    modelMatrix.getTranslation(vector);
+    this.boundingBox = new BoundingBox(modelMatrix, planeSize);
   }
 
   public void translate(final float x, final float y, final float z) {
     model.translate(x, y, z, model);
-    calculateBoundingBox();
+    boundingBox.translate(model);
   }
 
   public Matrix4f getModelMatrix() {
@@ -38,13 +38,5 @@ public class Position {
 
   public BoundingBox getBoundingBox() {
     return boundingBox;
-  }
-
-  // mutable
-  private void calculateBoundingBox() {
-    model.getTranslation(vector);
-    boundingBox = new BoundingBox(
-        new Point(vector.x() + 0.25f, vector.y()),
-        new Point(vector.x() + planeSize - 0.25f, vector.y() + planeSize - 0.65f));
   }
 }

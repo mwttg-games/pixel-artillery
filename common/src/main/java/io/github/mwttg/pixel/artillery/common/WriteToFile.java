@@ -1,6 +1,7 @@
 package io.github.mwttg.pixel.artillery.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import java.io.File;
 import java.io.IOException;
 import org.slf4j.Logger;
@@ -22,6 +23,8 @@ public interface WriteToFile {
   default void writeToFile(final String filename) {
     final var outputFile = new File(filename);
     final var objectMapper = new ObjectMapper();
+    objectMapper.registerModule(new Jdk8Module());
+
     try {
       objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputFile, this);
     } catch (final IOException exception) {
