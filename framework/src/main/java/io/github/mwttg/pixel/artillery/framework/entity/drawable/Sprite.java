@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL40;
 public class Sprite extends AbstractTexturedSprite implements Drawable {
 
   /**
-   * The Constructor. (calls the Constructor of the abstract parent class).
+   * The Constructor (calls the Constructor of the abstract parent class).
    *
    * @param jsonFile    the .json file which contains data for the geometry (vertices) and texture
    *                    coordinates
@@ -20,6 +20,17 @@ public class Sprite extends AbstractTexturedSprite implements Drawable {
    */
   public Sprite(final String jsonFile, final String textureFile) {
     super(jsonFile, textureFile);
+  }
+
+  /**
+   * The Constructor (calls the Constructor of the abstract parent class).
+   *
+   * @param width       the width of the plane (for the texture/sprite)
+   * @param height      the height of the plane (for the texture/sprite)
+   * @param textureFile the .png file for the texture
+   */
+  public Sprite(final float width, final float height, final String textureFile) {
+    super(width, height, textureFile);
   }
 
   @Override

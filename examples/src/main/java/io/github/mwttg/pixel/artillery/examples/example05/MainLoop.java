@@ -20,6 +20,7 @@ public class MainLoop {
   private final Grid levelBoundary;
 
   private final PlayerMovementSystem playerMovementSystem;
+  private final ParallaxScrollingSystem parallaxScrollingSystem;
 
   public MainLoop(final Configuration configuration) {
     final var playerIdleJsonFile = "files/player/blob/player-idle.json";
@@ -62,6 +63,7 @@ public class MainLoop {
     this.projectionMatrix = createOrtho2DMatrix(configuration);
 
     this.playerMovementSystem = new PlayerMovementSystem();
+    this.parallaxScrollingSystem = new ParallaxScrollingSystem(configuration, player);
   }
 
   public void loop(final long gameWindowId) {
@@ -79,6 +81,7 @@ public class MainLoop {
       GL40.glClear(GL40.GL_COLOR_BUFFER_BIT | GL40.GL_DEPTH_BUFFER_BIT);
 
       // render
+      parallaxScrollingSystem.draw(viewMatrix, projectionMatrix);
       level.draw(viewMatrix, projectionMatrix);
       player.draw(viewMatrix, projectionMatrix);
 

@@ -1,4 +1,4 @@
-package io.github.mwttg.pixel.artillery.tools.common;
+package io.github.mwttg.pixel.artillery.common;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,5 +57,30 @@ public final class TilesFactory {
         size, 0.0f, 0.0f,
         size, size, 0.0f,
         0.0f, size, 0.0f);
+  }
+
+  /**
+   * Creates a plane with a specific size.
+   *
+   * @param width  the width of the plane
+   * @param height the height of the plane
+   * @return a list of floats (six 3d points)
+   */
+  public static SpriteData createTile(final float width, final float height) {
+    return new SpriteData(
+        new float[] {
+            width, 0.0f, 0.0f,
+            0.0f, height, 0.0f,
+            0.0f, 0.0f, 0.0f,
+            width, 0.0f, 0.0f,
+            width, height, 0.0f,
+            0.0f, height, 0.0f},
+        new float[] {
+            1.0f, 0.0f,
+            0.0f, 1.0f,
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f});
   }
 }

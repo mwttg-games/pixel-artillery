@@ -2,6 +2,7 @@ package io.github.mwttg.pixel.artillery.tools.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.github.mwttg.pixel.artillery.common.TilesFactory;
 import org.testng.annotations.Test;
 
 public class TilesFactoryTest {

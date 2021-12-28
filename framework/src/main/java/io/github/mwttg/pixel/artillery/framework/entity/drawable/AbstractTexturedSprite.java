@@ -1,6 +1,7 @@
 package io.github.mwttg.pixel.artillery.framework.entity.drawable;
 
 import io.github.mwttg.pixel.artillery.common.SpriteData;
+import io.github.mwttg.pixel.artillery.common.TilesFactory;
 import io.github.mwttg.pixel.artillery.framework.entity.Entity;
 import io.github.mwttg.pixel.artillery.framework.graphics.ShaderFactory;
 import io.github.mwttg.pixel.artillery.framework.graphics.TextureLoader;
@@ -30,6 +31,16 @@ abstract class AbstractTexturedSprite {
   AbstractTexturedSprite(final String jsonFile, final String textureFile) {
     this.name = Entity.DEFAULT_DRAWABLE_NAME;
     final var spriteData = extractSpriteData(jsonFile);
+    this.completeAmountOfPoints = spriteData.vertices().length / 3;
+    this.vertexArrayObjectId = VertexArrayObject.create(spriteData);
+    this.textureId = TextureLoader.createFromResource(textureFile);
+    this.shaderProgramId = ShaderFactory.createTextureShader();
+    this.uniforms = new TexturedUniforms(this.shaderProgramId);
+  }
+
+  AbstractTexturedSprite(final float width, final float height, final String textureFile) {
+    this.name = Entity.DEFAULT_DRAWABLE_NAME;
+    final var spriteData = TilesFactory.createTile(width, height);
     this.completeAmountOfPoints = spriteData.vertices().length / 3;
     this.vertexArrayObjectId = VertexArrayObject.create(spriteData);
     this.textureId = TextureLoader.createFromResource(textureFile);

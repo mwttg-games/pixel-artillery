@@ -1,6 +1,6 @@
 package io.github.mwttg.pixel.artillery.tools.level;
 
-import io.github.mwttg.pixel.artillery.tools.common.TilesFactory;
+import io.github.mwttg.pixel.artillery.common.TilesFactory;
 import java.util.ArrayList;
 import java.util.List;
 

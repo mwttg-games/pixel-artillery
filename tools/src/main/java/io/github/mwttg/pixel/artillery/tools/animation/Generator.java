@@ -2,8 +2,8 @@ package io.github.mwttg.pixel.artillery.tools.animation;
 
 import io.github.mwttg.pixel.artillery.common.SpriteAnimationData;
 import io.github.mwttg.pixel.artillery.common.SpriteData;
+import io.github.mwttg.pixel.artillery.common.TilesFactory;
 import io.github.mwttg.pixel.artillery.tools.common.TextureCoordinateGenerator;
-import io.github.mwttg.pixel.artillery.tools.common.TilesFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
