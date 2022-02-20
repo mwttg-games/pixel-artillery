@@ -6,15 +6,15 @@ import org.joml.Matrix4f;
 /**
  * Unit for uploading uniforms for the textured shader program.
  */
-class TexturedUniforms implements Uniform {
+public class TexturedUniforms implements Uniform {
 
   private final Map<String, Integer> locations;
 
-  TexturedUniforms(final int shaderProgramId) {
+  public TexturedUniforms(final int shaderProgramId) {
     this.locations = initializeLocations(shaderProgramId);
   }
 
-  void upload(final Matrix4f model, final Matrix4f view, final Matrix4f projection,
+  public void upload(final Matrix4f model, final Matrix4f view, final Matrix4f projection,
               final int textureId) {
     uploadModelMatrix(locations, model);
     uploadViewMatrix(locations, view);
